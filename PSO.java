@@ -25,13 +25,21 @@ public class PSO
 	public PSO(int numParticles, int d,  double tol, int maxNumOfIterations, double lowerBound, double upperBound, int fType, double omega, 
 		double phiP, double phiG)
 	{
+
 		this.particles = new ArrayList<Particle>();
 		this.numParticles = numParticles;
 		this.d = d;
-		this.tol = tol;
-		this.maxNumOfIterations = maxNumOfIterations;
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
+
+		// construct initial particles
+		for (int i = 0; i < this.numParticles; ++i)
+		{
+			addParticle(new Particle(this.d, this.lowerBound, this.upperBound));
+		}
+
+		this.tol = tol;
+		this.maxNumOfIterations = maxNumOfIterations;
 		this.fType = fType;
 		this.omega = omega;
 		this.phiP = phiP;
@@ -208,24 +216,18 @@ public class PSO
 	{
 		if (args.length > 0)
 		{
-			int numParticles = Integer.parseInt(args[1]);	// e.g., 1000 or 10000
-			int d = Integer.parseInt(args[2]);	// e.g., 4
-			double lowerBound = Integer.parseInt(args[3]);	// e.g., 0
-			double upperBound = Integer.parseInt(args[4]);	// e.g., 1
-			int maxNumOfIterations = Integer.parseInt(args[5]);	// e.g., 1000
-			int fType = Integer.parseInt(args[6]);	// e.g., 2
-			double omega = Double.parseDouble(args[7]);	// e.g., 0.5
-			double phiP = Double.parseDouble(args[8]);	// e.g., 0.5
-			double phiG = Double.parseDouble(args[9]);	// e.g., 0.5
-			double tol = Double.parseDouble(args[10]);	// e.g., 1e-10
+			int numParticles = Integer.parseInt(args[0]);	// e.g., 1000 or 10000
+			int d = Integer.parseInt(args[1]);	// e.g., 4
+			double lowerBound = Integer.parseInt(args[2]);	// e.g., 0
+			double upperBound = Integer.parseInt(args[3]);	// e.g., 1
+			int maxNumOfIterations = Integer.parseInt(args[4]);	// e.g., 1000
+			int fType = Integer.parseInt(args[5]);	// e.g., 2
+			double omega = Double.parseDouble(args[6]);	// e.g., 0.5
+			double phiP = Double.parseDouble(args[7]);	// e.g., 0.5
+			double phiG = Double.parseDouble(args[8]);	// e.g., 0.5
+			double tol = Double.parseDouble(args[9]);	// e.g., 1e-10
 
 			PSO pso = new PSO(numParticles, d, tol, maxNumOfIterations, lowerBound, upperBound, fType, omega, phiP, phiG);
-		
-			// construct initial particles
-			for (int i = 0; i < numParticles; ++i)
-			{
-				pso.addParticle(new Particle(d, lowerBound, upperBound));
-			}
 			
 			// Run the PSO algorithm
 			pso.run();
