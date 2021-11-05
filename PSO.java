@@ -206,31 +206,39 @@ public class PSO
 	
 	public static void main(String[] args)
 	{
-		int numParticles = 100000;
-		int d = 4;
-		double lowerBound = 0;
-		double upperBound = 1;
-		int maxNumOfIterations = 10000;
-		int fType = 2;
-		double omega = 0.5;
-		double phiP = 0.5;
-		double phiG = 0.5;
-		double tol = 1e-10;
-		
-		PSO pso = new PSO(numParticles, d, tol, maxNumOfIterations, lowerBound, upperBound, fType, omega, phiP, phiG);
-		
-		// construct initial particles
-		for (int i = 0; i < numParticles; ++i)
+		if (args.length > 0)
 		{
-			pso.addParticle(new Particle(d, lowerBound, upperBound));
-		}
-		
-		// Run the PSO algorithm
-		pso.run();
-		
-		// Print results
-		pso.printSolution();
-		System.out.println("Optimum objective function value for solution g: " + pso.f(pso.getG(), fType));
+			int numParticles = Integer.parseInt(args[1]);	// e.g., 1000 or 10000
+			int d = Integer.parseInt(args[2]);	// e.g., 4
+			double lowerBound = Integer.parseInt(args[3]);	// e.g., 0
+			double upperBound = Integer.parseInt(args[4]);	// e.g., 1
+			int maxNumOfIterations = Integer.parseInt(args[5]);	// e.g., 1000
+			int fType = Integer.parseInt(args[6]);	// e.g., 2
+			double omega = Double.parseDouble(args[7]);	// e.g., 0.5
+			double phiP = Double.parseDouble(args[8]);	// e.g., 0.5
+			double phiG = Double.parseDouble(args[9]);	// e.g., 0.5
+			double tol = Double.parseDouble(args[10]);	// e.g., 1e-10
 
+			PSO pso = new PSO(numParticles, d, tol, maxNumOfIterations, lowerBound, upperBound, fType, omega, phiP, phiG);
+		
+			// construct initial particles
+			for (int i = 0; i < numParticles; ++i)
+			{
+				pso.addParticle(new Particle(d, lowerBound, upperBound));
+			}
+			
+			// Run the PSO algorithm
+			pso.run();
+			
+			// Print results
+			pso.printSolution();
+			System.out.println("Optimum objective function value for solution g: " + pso.f(pso.getG(), fType));
+			System.exit(0);
+		}
+		else
+		{
+			System.out.println("The current implementation of the PSO algorithm requires 10 command line arguments.");
+			System.exit(0);
+		}
 	}
 }
