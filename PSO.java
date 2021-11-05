@@ -7,7 +7,7 @@ public class PSO
 {
 	ArrayList<Particle> particles;
 	int numParticles;
-	int n;	// dimension of particles	
+	int d;	// dimension of particles	
 	double tol;	// tolerance for terminating the PSO algorithm
 	int maxNumOfIterations;	// maximum number of iterations for the PSO algorithm to terminate
 	double lowerBound;
@@ -26,7 +26,7 @@ public class PSO
 		double phiP, double phiG)
 	{
 		this.particles = new ArrayList<Particle>();
-		this.numParticles = _numParticles;
+		this.numParticles = numParticles;
 		this.d = d;
 		this.tol = tol;
 		this.maxNumOfIterations = maxNumOfIterations;
@@ -168,10 +168,10 @@ public class PSO
 		
 		Random r = new Random();
 		int iter = 0;
-		while (iter < _maxNumOfIterations)
+		while (iter < maxNumOfIterations)
 		{
 			System.out.println("Iteration " + (iter + 1));
-			for (int i = 0; i < _numParticles; ++i)
+			for (int i = 0; i < numParticles; ++i)
 			{
 				Particle particle = particles.get(i);
 				
