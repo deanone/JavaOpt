@@ -1,0 +1,1 @@
+This repo contains a native Java implementation of the Particle Swarm Optimization (PSO) algorithm. 
