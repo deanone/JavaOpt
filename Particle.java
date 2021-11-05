@@ -4,21 +4,21 @@ import java.lang.Math;
 
 public class Particle 
 {
-	int _n;
-	double _lowerBound;
-	double _upperBound;
-	double[] _x;
-	double[] _v;
-	double[] _p;
+	int n;
+	double lowerBound;
+	double upperBound;
+	double[] x;
+	double[] v;
+	double[] p;
 
-	public Particle(int _n, double _lowerBound, double _upperBound)
+	public Particle(int n, double lowerBound, double upperBound)
 	{
-		this._n = _n;
-		this._lowerBound = _lowerBound;
-		this._upperBound = _upperBound;
-		_x = new double[_n];
-		_v = new double[_n];
-		_p = new double[_n];
+		this.n = n;
+		this.lowerBound = lowerBound;
+		this.upperBound = upperBound;
+		this.x = new double[n];
+		this.v = new double[n];
+		this.p = new double[n];
 	}
 	
 	public void initialize()
@@ -26,50 +26,50 @@ public class Particle
 		Random r = new Random();
 		
 		// initialize x
-        for (int i = 0; i < _x.length; i++)
+        for (int i = 0; i < x.length; ++i)
         {
-            _x[i] = _lowerBound + (r.nextDouble() * (_upperBound - _lowerBound));;
+            x[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
         }
         
         // initialize p
-        this._p = Arrays.copyOf(_x, _x.length);
+        this.p = Arrays.copyOf(x, x.length);
         
         // initialize v
-        double _vLowerBound = (-1.0) * Math.abs(_upperBound - _lowerBound);
-        double _vUpperBound = Math.abs(_upperBound - _lowerBound);
-        for (int i = 0; i < _v.length; i++)
+        double vUpperBound = Math.abs(upperBound - lowerBound);
+        double vLowerBound = (-1.0) * vUpperBound;
+        
+        
+        for (int i = 0; i < v.length; ++i)
         {
-            _v[i] = _vLowerBound + (r.nextDouble() * (_vUpperBound - _vLowerBound));;
+            v[i] = vLowerBound + (r.nextDouble() * (vUpperBound - vLowerBound));
         }
 	}
 	
-	// method overloading in setters and getters
-	
-	public void n(int _n)
+	public void n(int n_)
 	{
-		this._n = _n;
+		this.n = n_;
 	}
 	
 	public int n()
 	{
-		return _n;
+		return n;
 	}
 	
-	public void x(double[] _x)
+	public void x(double[] x_)
 	{
-		this._x = Arrays.copyOf(_x, _x.length);
+		this.x = Arrays.copyOf(x_, x_.length);
 	}
 	
 	public double[] x()
 	{
-		return _x;
+		return x;
 	}
 	
 	public double x(int i)
 	{
-		if (i >= 0 && i < _n)
+		if (i >= 0 && i < n)
 		{
-			return _x[i];
+			return x[i];
 		}
 		else
 		{
@@ -77,21 +77,21 @@ public class Particle
 		}
 	}
 	
-	public void v(double[] _v)
+	public void v(double[] v_)
 	{
-		this._v = Arrays.copyOf(_v, _v.length);
+		this.v = Arrays.copyOf(v_, v_.length);
 	}
 	
 	public double[] v()
 	{
-		return _v;
+		return v;
 	}
 	
 	public double v(int i)
 	{
-		if (i >= 0 && i < _n)
+		if (i >= 0 && i < n)
 		{
-			return _v[i];
+			return v[i];
 		}
 		else
 		{
@@ -99,21 +99,21 @@ public class Particle
 		}
 	}
 	
-	public void p(double[] _p)
+	public void p(double[] p_)
 	{
-		this._p = Arrays.copyOf(_p, _p.length);
+		this.p = Arrays.copyOf(p_, p_.length);
 	}
 	
 	public double[] p()
 	{
-		return _p;
+		return p;
 	}
 	
 	public double p(int i)
 	{
-		if (i >= 0 && i < _n)
+		if (i >= 0 && i < n)
 		{
-			return _p[i];
+			return p[i];
 		}
 		else
 		{
