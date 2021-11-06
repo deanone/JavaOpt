@@ -21,9 +21,19 @@ public class PSO
 	
 	/**
 	 * Constructor.
+	 * @param numParticles the number of particles
+	 * @param d the dimension of the particles
+	 * @param tol the tolerance for terminating the algorithm
+	 * @param maxNumOfIterations the maximum number of iterations for the PSO algorithm to terminate
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param fType the function to optimize
+	 * @param omege
+	 * @param phiP
+	 * @param phiG
 	 */
-	public PSO(int numParticles, int d,  double tol, int maxNumOfIterations, double lowerBound, double upperBound, int fType, double omega, 
-		double phiP, double phiG)
+	public PSO(int numParticles, int d,  double tol, int maxNumOfIterations, double lowerBound, 
+		double upperBound, int fType, double omega, double phiP, double phiG)
 	{
 
 		this.particles = new ArrayList<Particle>();
@@ -56,6 +66,10 @@ public class PSO
 		isOver = false;
 	}
 	
+	/**
+	 * Returns the number of particles.
+	 * @return the number of particles.
+	 */
 	public int getNumParticles()
 	{
 		return numParticles;
