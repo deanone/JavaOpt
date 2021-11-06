@@ -75,46 +75,77 @@ public class PSO
 		return numParticles;
 	}
 	
+	/**
+	 * Returns the dimension of the particles.
+	 * @return the dimension of the particles.
+	 */
 	public int getParticlesDimension()
 	{
 		return d;
 	}
 	
+	/**
+	 * Returns the tolerance for terminating the algorithm.
+	 * @return the tolerance for terminating the algorithm.
+	 */
 	public double getTol()
 	{
 		return tol;
 	}
 	
+	/**
+	 * Returns the maximum number of iterations for the PSO algorithm to terminate.
+	 * @return the maximum number of iterations for the PSO algorithm to terminate.
+	 */
 	public int getMaxNumOfIterations()
 	{
 		return maxNumOfIterations;
 	}
-	
+
+	/**
+	 * Returns the omega parameter.
+	 * @return the omega parameter.
+	 */
 	public double getOmega()
 	{
 		return omega;
 	}
 	
+	/**
+	 * Returns the phiP parameter.
+	 * @return the phiP parameter.
+	 */
 	public double getPhiP()
 	{
 		return phiP;
 	}
 	
+	/**
+	 * Returns the phiG parameter.
+	 * @return the phiG parameter.
+	 */
 	public double getPhiG()
 	{
 		return phiG;
 	}
-	
-	public double[] getG()
-	{
-		return g;
-	}
-	
+
 	public boolean over()
 	{
 		return isOver;
 	}
-	
+
+	/**
+	 * Returns the solution.
+	 * @return the solution.
+	 */
+	public double[] getSolution()
+	{
+		return g;
+	}
+
+	/**
+	 * Prints the solution.
+	 */
 	public void printSolution()
 	{
 		System.out.print("Solution: g=[");
