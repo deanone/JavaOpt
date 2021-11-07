@@ -4,13 +4,32 @@ import java.lang.Math;
 
 public class Particle 
 {
-	int d;	// dimension of the particle
+	/**
+	 * The dimension of the particle.
+	 */
+	int d;
 	double lowerBound;
 	double upperBound;
+	/**
+	 * The position of the particle.
+	 */
 	double[] x;
+	/**
+	 * The velocity of the particle.
+	 */
 	double[] v;
+	/**
+	 * The best position of the particle.
+	 */
 	double[] p;
 
+
+	/**
+	 * Constructor.
+	 * @param d the dimension of the particle.
+	 * @param lowerBound
+	 * @param upperBound
+	 */
 	public Particle(int d, double lowerBound, double upperBound)
 	{
 		this.d = d;
@@ -21,6 +40,9 @@ public class Particle
 		this.p = new double[d];
 	}
 	
+	/**
+	 * Initializes the particle.
+	 */
 	public void initialize()
 	{
 		Random r = new Random();
@@ -43,6 +65,10 @@ public class Particle
         }
 	}
 	
+	/**
+	 * Sets the dimension of the particle.
+	 * @param d_ the dimension of the particle.
+	 */
 	public void d(int d_)
 	{
 		this.d = d_;

@@ -62,6 +62,25 @@ public class PSO
 			System.out.println("Exception: " + e);
 		}
 	}
+
+	/**
+	 * Adds a new particle to the list of particles.
+	 * @param p the new particle.
+	 */
+	public void addParticle(Particle p)
+	{
+		particles.add(p);
+	}
+
+	/**
+	 * Returns a particle from the list of particles.
+	 * @param i the index of the particle to return.
+	 * @return the particle at the input index.
+	 */
+	public Particle getParticle(int i)
+	{
+		return particles.get(i);
+	}
 	
 	/**
 	 * Returns the number of particles.
@@ -148,17 +167,13 @@ public class PSO
 		}
 		System.out.println("]");
 	}
-		
-	public void addParticle(Particle p)
-	{
-		particles.add(p);
-	}
 	
-	public Particle getParticle(int i)
-	{
-		return particles.get(i);
-	}
-	
+	/**
+	 * Computes the Euclidean distance between two vectors.
+	 * @param x the first vector.
+	 * @param y the second vector.
+	 * @return the Euclidean distance.
+	 */
 	public double euclideanDistance(double[] x, double[] y)
 	{
 		double dist = 0.0;
@@ -170,6 +185,9 @@ public class PSO
 		return dist;
 	}
 	
+	/**
+	 * Runs the iterative PSO procedure.
+	 */
 	public void run()
 	{
 		// initialization
@@ -236,6 +254,9 @@ public class PSO
 		}
 	}
 	
+	/**
+	 * Starting point of the application.
+	 */
 	public static void main(String[] args)
 	{
 		PSO pso = new PSO();

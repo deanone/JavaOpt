@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.HashMap;
@@ -7,8 +8,10 @@ import java.nio.file.Paths;
 public class PSOPropertiesParser
 {
 	HashMap<String, String> propMap;
-	InputStream inputStream;
 	
+	/**
+	 * Reads the values of the properties from the properties file.
+	 */
 	public void readPropValues()
 	{
 		try
@@ -16,10 +19,8 @@ public class PSOPropertiesParser
 			propMap = new HashMap<String, String>();
 			Properties prop = new Properties();
 			String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
-			String propFileName = cwd + "/pso.properties";
-
-			// TODO: Change the following line in order for the inputStream to read the pso.properties file from the cwd.
-			//inputStream = new InputStream(propFileName);
+			String propFileName = cwd + "/PSO.properties";
+			InputStream inputStream =  new FileInputStream(propFileName);
 
 			if (inputStream != null) 
 			{
@@ -37,8 +38,8 @@ public class PSOPropertiesParser
 				propMap.put("phiP", prop.getProperty("phiP"));
 				propMap.put("phiG", prop.getProperty("phiG"));
 
-				System.out.println("OK1.2.8");
 			}
+			// TODO: Implement handler of the else case.
 			inputStream.close();
 		}
 		catch (Exception e)
@@ -47,11 +48,21 @@ public class PSOPropertiesParser
 		}
 	}
 
+	/**
+	 * Returns the value of a property as integer.
+	 * @param propertyName the name of the property.
+	 * @return the value of the property (as integer).
+	 */
 	int getPropertyAsInteger(String propertyName)
 	{
 		return Integer.parseInt(propMap.get(propertyName));
 	}
 
+	/**
+	 * Returns the value of a property as double.
+	 * @param propertyName the name of the property.
+	 * @return the value of the property (as double).
+	 */
 	double getPropertyAsDouble(String propertyName)
 	{
 		return Double.parseDouble(propMap.get(propertyName));
