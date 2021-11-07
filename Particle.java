@@ -74,21 +74,38 @@ public class Particle
 		this.d = d_;
 	}
 	
+	/**
+	 * Returns the dimension of the particle.
+	 * @return the dimension of the particle.
+	 */
 	public int d()
 	{
 		return d;
 	}
 	
+	/**
+	 * Sets the position of the particle.
+	 * @param x_ the position of the particle.
+	 */
 	public void x(double[] x_)
 	{
 		this.x = Arrays.copyOf(x_, x_.length);
 	}
 	
+	/**
+	 * Returns the position of the particle.
+	 * @return the position of the particle.
+	 */
 	public double[] x()
 	{
 		return x;
 	}
 	
+	/**
+	 * Returns the a specifc value from the position vector of the particle.
+	 * @param i the index of the value to return.
+	 * @return the specific value from the position vector of the particle.
+	 */
 	public double x(int i)
 	{
 		if (i >= 0 && i < d)
@@ -101,16 +118,29 @@ public class Particle
 		}
 	}
 	
+	/**
+	 * Sets the velocity of the particle.
+	 * @param v_ the velocity of the particle.
+	 */
 	public void v(double[] v_)
 	{
 		this.v = Arrays.copyOf(v_, v_.length);
 	}
 	
+	/**
+	 * Returns the velocity of the particle.
+	 * @return the velocity of the particle.
+	 */
 	public double[] v()
 	{
 		return v;
 	}
 	
+	/**
+	 * Returns the a specifc value from the velocity vector of the particle.
+	 * @param i the index of the value to return.
+	 * @return the specific value from the velocity vector of the particle.
+	 */
 	public double v(int i)
 	{
 		if (i >= 0 && i < d)
@@ -123,16 +153,29 @@ public class Particle
 		}
 	}
 	
+	/**
+	 * Sets the best position of the particle.
+	 * @param p_ the best position of the particle.
+	 */
 	public void p(double[] p_)
 	{
 		this.p = Arrays.copyOf(p_, p_.length);
 	}
 	
+	/**
+	 * Returns the best position of the particle.
+	 * @return the best position of the particle.
+	 */
 	public double[] p()
 	{
 		return p;
 	}
 	
+	/**
+	 * Returns the a specifc value from the best position vector of the particle.
+	 * @param i the index of the value to return.
+	 * @return the specific value from the best position vector of the particle.
+	 */
 	public double p(int i)
 	{
 		if (i >= 0 && i < d)

@@ -10,16 +10,46 @@ public class PSO
 	FuncToOpt f;
 	ArrayList<Particle> particles;
 
-	int numParticles;	// number of particles
-	int d;	// dimension of particles	
-	double tol;	// tolerance for terminating the PSO algorithm
-	int maxNumOfIterations;	// maximum number of iterations for the PSO algorithm to terminate
+	/**
+	 * The number of particles.
+	 */
+	int numParticles;
+	/**
+	 * The dimension of particles.
+	 */
+	int d;
+	/**
+	 * The tolerance for terminating the PSO method.
+	 */
+	double tol;
+	/**
+	 * The maximum number of iterations for the PSO method to terminate.
+	 */
+	int maxNumOfIterations;
+	/**
+	 * 
+	 */
 	double lowerBound;
+	/**
+	 * 
+	 */
 	double upperBound;
-	double w;	// inertia weight
-	double phiP;	// cognitive coefficient
-	double phiG;	// social coefficient
-	double[] g;	// swarm's best known position
+	/**
+	 * The inertia weight.
+	 */
+	double w;
+	/**
+	 * The cognitive coefficient.
+	 */
+	double phiP;
+	/**
+	 * The social coefficient.
+	 */
+	double phiG;
+	/**
+	 * The solution estimated by the PSO method.
+	 */
+	double[] g;
 
 	/**
 	 * Constructor.
