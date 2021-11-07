@@ -37,8 +37,6 @@ public class Particle
         // initialize v
         double vUpperBound = Math.abs(upperBound - lowerBound);
         double vLowerBound = (-1.0) * vUpperBound;
-        
-        
         for (int i = 0; i < v.length; ++i)
         {
             v[i] = vLowerBound + (r.nextDouble() * (vUpperBound - vLowerBound));

@@ -1,69 +1,66 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.lang.Math; 
+import java.lang.Math;
+import java.io.IOException;
 
 public class PSO 
 {
+	PSOPropertiesParser psopp;
+	FuncToOpt f;
 	ArrayList<Particle> particles;
-	int numParticles;
+
+	int numParticles;	// number of particles
 	int d;	// dimension of particles	
 	double tol;	// tolerance for terminating the PSO algorithm
 	int maxNumOfIterations;	// maximum number of iterations for the PSO algorithm to terminate
 	double lowerBound;
 	double upperBound;
-	int fType;
-	double omega;
-	double phiP;
-	double phiG;
+	double w;	// inertia weight
+	double phiP;	// cognitive coefficient
+	double phiG;	// social coefficient
 	double[] g;	// swarm's best known position
-	boolean isOver;
-	
+
 	/**
 	 * Constructor.
-	 * @param numParticles the number of particles
-	 * @param d the dimension of the particles
-	 * @param tol the tolerance for terminating the algorithm
-	 * @param maxNumOfIterations the maximum number of iterations for the PSO algorithm to terminate
-	 * @param lowerBound
-	 * @param upperBound
-	 * @param fType the function to optimize
-	 * @param omege
-	 * @param phiP
-	 * @param phiG
 	 */
-	public PSO(int numParticles, int d,  double tol, int maxNumOfIterations, double lowerBound, 
-		double upperBound, int fType, double omega, double phiP, double phiG)
+	public PSO()
 	{
-
-		this.particles = new ArrayList<Particle>();
-		this.numParticles = numParticles;
-		this.d = d;
-		this.lowerBound = lowerBound;
-		this.upperBound = upperBound;
-
-		// construct initial particles
-		for (int i = 0; i < this.numParticles; ++i)
+		try
 		{
-			addParticle(new Particle(this.d, this.lowerBound, this.upperBound));
+			psopp = new PSOPropertiesParser();
+			psopp.readPropValues();
+			this.f = new FuncToOpt(psopp.getPropertyAsInteger("fType"));
+			this.particles = new ArrayList<Particle>();
+			this.numParticles = psopp.getPropertyAsInteger("numParticles");
+			this.d = psopp.getPropertyAsInteger("d");
+			this.tol = psopp.getPropertyAsDouble("tol");
+			this.maxNumOfIterations = psopp.getPropertyAsInteger("maxNumOfIterations");
+			this.lowerBound = psopp.getPropertyAsDouble("lowerBound");
+			this.upperBound = psopp.getPropertyAsDouble("upperBound");
+			this.w = psopp.getPropertyAsDouble("w");
+			this.phiP = psopp.getPropertyAsDouble("phiP");
+			this.phiG = psopp.getPropertyAsDouble("phiG");
+
+			// construct initial particles
+			for (int i = 0; i < this.numParticles; ++i)
+			{
+				addParticle(new Particle(this.d, this.lowerBound, this.upperBound));
+			}
+
+			g = new double[d];
+
+			Random r = new Random();
+	        for (int i = 0; i < g.length; ++i)
+	        {
+	            g[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+	        }
+		
 		}
-
-		this.tol = tol;
-		this.maxNumOfIterations = maxNumOfIterations;
-		this.fType = fType;
-		this.omega = omega;
-		this.phiP = phiP;
-		this.phiG = phiG;
-		
-		g = new double[d];
-
-		Random r = new Random();
-        for (int i = 0; i < g.length; ++i)
-        {
-            g[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
-        }
-		
-		isOver = false;
+		catch (Exception e)
+		{
+			System.out.println("Exception: " + e);
+		}
 	}
 	
 	/**
@@ -103,12 +100,12 @@ public class PSO
 	}
 
 	/**
-	 * Returns the omega parameter.
-	 * @return the omega parameter.
+	 * Returns the inertia weight.
+	 * @return the inertia weight.
 	 */
-	public double getOmega()
+	public double getW()
 	{
-		return omega;
+		return w;
 	}
 	
 	/**
@@ -127,11 +124,6 @@ public class PSO
 	public double getPhiG()
 	{
 		return phiG;
-	}
-
-	public boolean over()
-	{
-		return isOver;
 	}
 
 	/**
@@ -156,33 +148,7 @@ public class PSO
 		}
 		System.out.println("]");
 	}
-	
-	// Function to be optimized
-	double f(double[] x, int type)
-	{
-		double result = 0.0;
-		if (type == 1)	// Sphere function
-		{
-			for (int i = 0; i < x.length; ++i)
-			{
-				result += Math.pow(x[i], 2);
-			}
-			return result;
-		}
-		else if (type == 2)	// Rosenbrock function
-		{
-			for (int i = 0; i < (x.length - 1); ++i)
-			{
-				result += (100 * Math.pow(x[i + 1] - Math.pow(x[i], 2), 2) + Math.pow(1 - x[i], 2));
-			}
-			return result;
-		}
-		else	// TODO: Add more optimization test functions
-		{
-			return -1.0;
-		}
-	}
-	
+		
 	public void addParticle(Particle p)
 	{
 		particles.add(p);
@@ -193,34 +159,38 @@ public class PSO
 		return particles.get(i);
 	}
 	
-//	private double distance(double[] x, double[] y)
-//	{
-//		double dist = 0.0;
-//		for (int i = 0; i < x.length; i++)
-//		{
-//			dist += Math.pow(x[i] - y[i], 2);
-//		}
-//		dist = Math.sqrt(dist);
-//		return dist;
-//	}
+	public double euclideanDistance(double[] x, double[] y)
+	{
+		double dist = 0.0;
+		for (int i = 0; i < x.length; ++i)
+		{
+			dist += Math.pow(x[i] - y[i], 2);
+		}
+		dist = Math.sqrt(dist);
+		return dist;
+	}
 	
 	public void run()
 	{
+		// initialization
 		for (int i = 0; i < numParticles; ++i)
 		{
 			Particle particle = particles.get(i);
 			particle.initialize();
 			double[] p = particle.p();
-			double fp = f(p, fType);
-			double fg = f(g, fType);			
+			double fp = f.f(p);
+			double fg = f.f(g);			
 			if (fp < fg)
 			{
 				g = Arrays.copyOf(p, p.length);
 			}
 		}
 		
+		// main iteration loop
 		Random r = new Random();
 		int iter = 0;
+		double[] gOld = new double[g.length];
+		gOld = Arrays.copyOf(g, g.length);
 		while (iter < maxNumOfIterations)
 		{
 			System.out.println("Iteration " + (iter + 1));
@@ -236,56 +206,42 @@ public class PSO
 				{
 					double rp = r.nextDouble();
 					double rg = r.nextDouble();
-					v[j] = omega * v[j] + phiP * rp * (p[j] - x[j]) + phiG * rg * (g[j] - x[j]);
-					x[j] = x[j] - v[j];
+					v[j] = w * v[j] + phiP * rp * (p[j] - x[j]) + phiG * rg * (g[j] - x[j]);
+					x[j] = x[j] + v[j];
 				}
 
 				
-				if (f(x, fType) < f(p, fType))
+				if (f.f(x) < f.f(p))
 				{
 					// Update the particle's best known position
 					particle.p(x);
 					p = particle.p();
-					if (f(p, fType) < f(g, fType))
+					if (f.f(p) < f.f(g))
 					{
 						// Update the swarm's best known position
 						g = Arrays.copyOf(p, d);
 					}
 				}
 			}
-			iter++;
+
+			if (euclideanDistance(gOld, g) < tol)
+			{
+				break;
+			}
+			else
+			{
+				gOld = Arrays.copyOf(g, g.length);
+				iter++;
+			}
 		}
 	}
 	
 	public static void main(String[] args)
 	{
-		if (args.length > 0)
-		{
-			int numParticles = Integer.parseInt(args[0]);	// e.g., 1000 or 10000
-			int d = Integer.parseInt(args[1]);	// e.g., 4
-			double lowerBound = Integer.parseInt(args[2]);	// e.g., 0
-			double upperBound = Integer.parseInt(args[3]);	// e.g., 1
-			int maxNumOfIterations = Integer.parseInt(args[4]);	// e.g., 1000
-			int fType = Integer.parseInt(args[5]);	// e.g., 2
-			double omega = Double.parseDouble(args[6]);	// e.g., 0.5
-			double phiP = Double.parseDouble(args[7]);	// e.g., 0.5
-			double phiG = Double.parseDouble(args[8]);	// e.g., 0.5
-			double tol = Double.parseDouble(args[9]);	// e.g., 1e-10
-
-			PSO pso = new PSO(numParticles, d, tol, maxNumOfIterations, lowerBound, upperBound, fType, omega, phiP, phiG);
-			
-			// Run the PSO algorithm
-			pso.run();
-			
-			// Print results
-			pso.printSolution();
-			System.out.println("Optimum objective function value for solution g: " + pso.f(pso.getG(), fType));
-			System.exit(0);
-		}
-		else
-		{
-			System.out.println("The current implementation of the PSO algorithm requires 10 command line arguments.");
-			System.exit(0);
-		}
+		PSO pso = new PSO();
+		pso.run();
+		pso.printSolution();
+		System.out.println("Optimum objective function value for solution g: " + pso.f.f(pso.getSolution()));
+		System.exit(0);
 	}
 }
