@@ -14,38 +14,47 @@ public class PSO
 	 * The number of particles.
 	 */
 	int numParticles;
+
 	/**
 	 * The dimension of particles.
 	 */
 	int d;
+
 	/**
 	 * The tolerance for terminating the PSO method.
 	 */
 	double tol;
+
 	/**
 	 * The maximum number of iterations for the PSO method to terminate.
 	 */
 	int maxNumOfIterations;
+
 	/**
 	 * 
 	 */
 	double lowerBound;
+
 	/**
 	 * 
 	 */
 	double upperBound;
+
 	/**
 	 * The inertia weight.
 	 */
 	double w;
+
 	/**
 	 * The cognitive coefficient.
 	 */
 	double phiP;
+
 	/**
 	 * The social coefficient.
 	 */
 	double phiG;
+
 	/**
 	 * The solution estimated by the PSO method.
 	 */
@@ -199,23 +208,6 @@ public class PSO
 	}
 	
 	/**
-	 * Computes the Euclidean distance between two vectors.
-	 * @param x the first vector.
-	 * @param y the second vector.
-	 * @return the Euclidean distance.
-	 */
-	public double euclideanDistance(double[] x, double[] y)
-	{
-		double dist = 0.0;
-		for (int i = 0; i < x.length; ++i)
-		{
-			dist += Math.pow(x[i] - y[i], 2);
-		}
-		dist = Math.sqrt(dist);
-		return dist;
-	}
-	
-	/**
 	 * Runs the iterative PSO procedure.
 	 */
 	public void run()
@@ -272,7 +264,10 @@ public class PSO
 				}
 			}
 
-			if (euclideanDistance(gOld, g) < tol)
+			DistanceCalculator dc = new DistanceCalculator(gOld, g);
+			double dist = dc.euclideanDistance();
+
+			if (dist < tol)
 			{
 				break;
 			}
