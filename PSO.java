@@ -90,10 +90,10 @@ public class PSO
 			g = new double[d];
 
 			Random r = new Random();
-	        for (int i = 0; i < g.length; ++i)
-	        {
-	            g[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
-	        }
+			for (int i = 0; i < g.length; ++i)
+			{
+				g[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+			}
 		
 		}
 		catch (Exception e)
@@ -281,6 +281,12 @@ public class PSO
 	
 	/**
 	 * Starting point of the application.
+	 * TODO: To check and (possibly) refactor the following classes:
+	 * 1. DistanceCalculator
+	 * 2. FuncToOpt
+	 * 3. Particle
+	 * 4. PSOPropertiesParser
+	 * 5. PSO
 	 */
 	public static void main(String[] args)
 	{

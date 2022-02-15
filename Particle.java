@@ -48,21 +48,21 @@ public class Particle
 		Random r = new Random();
 		
 		// initialize x
-        for (int i = 0; i < x.length; ++i)
-        {
-            x[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
-        }
-        
-        // initialize p
-        this.p = Arrays.copyOf(x, x.length);
-        
-        // initialize v
-        double vUpperBound = Math.abs(upperBound - lowerBound);
-        double vLowerBound = (-1.0) * vUpperBound;
-        for (int i = 0; i < v.length; ++i)
-        {
-            v[i] = vLowerBound + (r.nextDouble() * (vUpperBound - vLowerBound));
-        }
+		for (int i = 0; i < x.length; ++i)
+		{
+			x[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+		}
+		
+		// initialize p
+		this.p = Arrays.copyOf(x, x.length);
+		
+		// initialize v
+		double vUpperBound = Math.abs(upperBound - lowerBound);
+		double vLowerBound = (-1.0) * vUpperBound;
+		for (int i = 0; i < v.length; ++i)
+		{
+			v[i] = vLowerBound + (r.nextDouble() * (vUpperBound - vLowerBound));
+		}
 	}
 	
 	/**
