@@ -282,9 +282,7 @@ public class PSO
     /**
      * Starting point of the application.
      * TODO: To check and (possibly) refactor the following classes:
-     * 1. Particle
-     * 2. PSOPropertiesParser
-     * 3. PSO
+     * 1. PSO
      */
     public static void main(String[] args)
     {

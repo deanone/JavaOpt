@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class PSOPropertiesParser
 {
-    HashMap<String, String> propMap;
+    HashMap<String, String> propertiesMap;
     
     /**
      * Reads the values of the properties from the properties file.
@@ -16,7 +16,7 @@ public class PSOPropertiesParser
     {
         try
         {
-            propMap = new HashMap<String, String>();
+            propertiesMap = new HashMap<String, String>();
             Properties prop = new Properties();
             String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
             String propFileName = cwd + "/PSO.properties";
@@ -26,18 +26,17 @@ public class PSOPropertiesParser
             {
                 prop.load(inputStream);
 
-                // get the property value
-                propMap.put("fType", prop.getProperty("fType"));
-                propMap.put("numParticles", prop.getProperty("numParticles"));
-                propMap.put("d", prop.getProperty("d"));
-                propMap.put("tol", prop.getProperty("tol"));
-                propMap.put("maxNumOfIterations", prop.getProperty("maxNumOfIterations"));
-                propMap.put("lowerBound", prop.getProperty("lowerBound"));
-                propMap.put("upperBound", prop.getProperty("upperBound"));
-                propMap.put("w", prop.getProperty("w"));
-                propMap.put("phiP", prop.getProperty("phiP"));
-                propMap.put("phiG", prop.getProperty("phiG"));
-
+                // set the properties' values
+                propertiesMap.put("fType", prop.getProperty("fType"));
+                propertiesMap.put("numParticles", prop.getProperty("numParticles"));
+                propertiesMap.put("d", prop.getProperty("d"));
+                propertiesMap.put("tol", prop.getProperty("tol"));
+                propertiesMap.put("maxNumOfIterations", prop.getProperty("maxNumOfIterations"));
+                propertiesMap.put("lowerBound", prop.getProperty("lowerBound"));
+                propertiesMap.put("upperBound", prop.getProperty("upperBound"));
+                propertiesMap.put("w", prop.getProperty("w"));
+                propertiesMap.put("phiP", prop.getProperty("phiP"));
+                propertiesMap.put("phiG", prop.getProperty("phiG"));
             }
             // TODO: Implement handler of the else case.
             inputStream.close();
@@ -55,7 +54,7 @@ public class PSOPropertiesParser
      */
     int getPropertyAsInteger(String propertyName)
     {
-        return Integer.parseInt(propMap.get(propertyName));
+        return Integer.parseInt(propertiesMap.get(propertyName));
     }
 
     /**
@@ -65,6 +64,6 @@ public class PSOPropertiesParser
      */
     double getPropertyAsDouble(String propertyName)
     {
-        return Double.parseDouble(propMap.get(propertyName));
+        return Double.parseDouble(propertiesMap.get(propertyName));
     }
 }
