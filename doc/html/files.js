@@ -3,8 +3,8 @@ var files =
     [ "DistanceCalculator.java", "_distance_calculator_8java.html", [
       [ "DistanceCalculator", "class_distance_calculator.html", "class_distance_calculator" ]
     ] ],
-    [ "FuncToOpt.java", "_func_to_opt_8java.html", [
-      [ "FuncToOpt", "class_func_to_opt.html", "class_func_to_opt" ]
+    [ "FunctionToOptimize.java", "_function_to_optimize_8java.html", [
+      [ "FunctionToOptimize", "class_function_to_optimize.html", "class_function_to_optimize" ]
     ] ],
     [ "Particle.java", "_particle_8java.html", [
       [ "Particle", "class_particle.html", "class_particle" ]

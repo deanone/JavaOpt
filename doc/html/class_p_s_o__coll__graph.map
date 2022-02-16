@@ -1,4 +1,4 @@
 <map id="PSO" name="PSO">
-<area shape="rect" id="node2" href="$class_func_to_opt.html" title="FuncToOpt" alt="" coords="5,95,92,121"/>
-<area shape="rect" id="node3" href="$class_p_s_o_properties_parser.html" title="PSOPropertiesParser" alt="" coords="117,95,263,121"/>
+<area shape="rect" id="node2" href="$class_function_to_optimize.html" title="FunctionToOptimize" alt="" coords="5,95,144,121"/>
+<area shape="rect" id="node3" href="$class_p_s_o_properties_parser.html" title="PSOPropertiesParser" alt="" coords="168,95,315,121"/>
 </map>

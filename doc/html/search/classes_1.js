@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['functoopt',['FuncToOpt',['../class_func_to_opt.html',1,'']]]
+  ['functiontooptimize',['FunctionToOptimize',['../class_function_to_optimize.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['functoopt_2ejava',['FuncToOpt.java',['../_func_to_opt_8java.html',1,'']]]
+  ['functiontooptimize_2ejava',['FunctionToOptimize.java',['../_function_to_optimize_8java.html',1,'']]]
 ];

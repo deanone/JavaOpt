@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['functoopt',['FuncToOpt',['../class_func_to_opt.html',1,'FuncToOpt'],['../class_func_to_opt.html#a956a9009cd97109baf9374eb87bcbd6c',1,'FuncToOpt.FuncToOpt()']]],
-  ['functoopt_2ejava',['FuncToOpt.java',['../_func_to_opt_8java.html',1,'']]]
+  ['functiontooptimize',['FunctionToOptimize',['../class_function_to_optimize.html',1,'FunctionToOptimize'],['../class_function_to_optimize.html#ac98c69a430ad4270a84a9f17e48aaf0e',1,'FunctionToOptimize.FunctionToOptimize()']]],
+  ['functiontooptimize_2ejava',['FunctionToOptimize.java',['../_function_to_optimize_8java.html',1,'']]]
 ];
