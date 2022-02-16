@@ -8,27 +8,37 @@ public class Particle
      * The dimension of the particle.
      */
     int d;
+
+    /**
+     * The lower bound of the interval from which the random values of the Particle are generated.
+     */
     double lowerBound;
+    
+    /**
+     * The upper bound of the interval from which the random values of the Particle are generated.
+     */
     double upperBound;
+    
     /**
      * The position of the particle.
      */
     double[] x;
+    
     /**
      * The velocity of the particle.
      */
     double[] v;
+    
     /**
      * The best position of the particle.
      */
     double[] p;
 
-
     /**
      * Constructor.
      * @param d the dimension of the particle.
-     * @param lowerBound
-     * @param upperBound
+     * @param lowerBound the lower bound of the interval from which the random values of the Particle are generated.
+     * @param upperBound the upper bound of the interval from which the random values of the Particle are generated.
      */
     public Particle(int d, double lowerBound, double upperBound)
     {
@@ -67,11 +77,11 @@ public class Particle
     
     /**
      * Sets the dimension of the particle.
-     * @param d_ the dimension of the particle.
+     * @param d the dimension of the particle.
      */
-    public void d(int d_)
+    public void d(int d)
     {
-        this.d = d_;
+        this.d = d;
     }
     
     /**
@@ -85,11 +95,11 @@ public class Particle
     
     /**
      * Sets the position of the particle.
-     * @param x_ the position of the particle.
+     * @param x the position of the particle.
      */
-    public void x(double[] x_)
+    public void x(double[] x)
     {
-        this.x = Arrays.copyOf(x_, x_.length);
+        this.x = Arrays.copyOf(x, x.length);
     }
     
     /**
@@ -102,7 +112,7 @@ public class Particle
     }
     
     /**
-     * Returns the a specifc value from the position vector of the particle.
+     * Returns a specifc value from the position vector of the particle.
      * @param i the index of the value to return.
      * @return the specific value from the position vector of the particle.
      */
@@ -114,17 +124,17 @@ public class Particle
         }
         else
         {
-            return -1.0;
+            return -1.0;    // TODO: Better handle the case where index is out of array's bounds
         }
     }
     
     /**
      * Sets the velocity of the particle.
-     * @param v_ the velocity of the particle.
+     * @param v the velocity of the particle.
      */
-    public void v(double[] v_)
+    public void v(double[] v)
     {
-        this.v = Arrays.copyOf(v_, v_.length);
+        this.v = Arrays.copyOf(v, v.length);
     }
     
     /**
@@ -137,7 +147,7 @@ public class Particle
     }
     
     /**
-     * Returns the a specifc value from the velocity vector of the particle.
+     * Returns a specifc value from the velocity vector of the particle.
      * @param i the index of the value to return.
      * @return the specific value from the velocity vector of the particle.
      */
@@ -149,17 +159,17 @@ public class Particle
         }
         else
         {
-            return -1.0;
+            return -1.0;    // TODO: Better handle the case where index is out of array's bounds
         }
     }
     
     /**
      * Sets the best position of the particle.
-     * @param p_ the best position of the particle.
+     * @param p the best position of the particle.
      */
-    public void p(double[] p_)
+    public void p(double[] p)
     {
-        this.p = Arrays.copyOf(p_, p_.length);
+        this.p = Arrays.copyOf(p, p.length);
     }
     
     /**
@@ -172,7 +182,7 @@ public class Particle
     }
     
     /**
-     * Returns the a specifc value from the best position vector of the particle.
+     * Returns a specifc value from the best position vector of the particle.
      * @param i the index of the value to return.
      * @return the specific value from the best position vector of the particle.
      */
@@ -184,7 +194,7 @@ public class Particle
         }
         else
         {
-            return -1.0;
+            return -1.0;    // TODO: Better handle the case where index is out of array's bounds
         }
     }
 }
