@@ -7,7 +7,7 @@ import java.io.IOException;
 public class PSO 
 {
 	PSOPropertiesParser psopp;
-	FuncToOpt f;
+	FunctionToOptimize f;
 	ArrayList<Particle> particles;
 
 	/**
@@ -69,7 +69,7 @@ public class PSO
 		{
 			psopp = new PSOPropertiesParser();
 			psopp.readPropValues();
-			this.f = new FuncToOpt(psopp.getPropertyAsInteger("fType"));
+			this.f = new FunctionToOptimize(psopp.getPropertyAsInteger("fType"));
 			this.particles = new ArrayList<Particle>();
 			this.numParticles = psopp.getPropertyAsInteger("numParticles");
 			this.d = psopp.getPropertyAsInteger("d");

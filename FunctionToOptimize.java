@@ -1,12 +1,23 @@
-public class FuncToOpt
+public class FunctionToOptimize
 {
+	/**
+	 * Variable to distinguish functions from each other.
+	 */
 	int type;
 
-	public FuncToOpt(int type)
+	/**
+	 * Constructor.
+	 */
+	public FunctionToOptimize(int type)
 	{
 		this.type = type;
 	}
 
+	/**
+	 * Implements a mathematical function optimized by PSO.
+	 * @param x the input of the function.
+	 * @return output of the function.
+	 */
 	double f(double[] x)
 	{
 		double result = 0.0;

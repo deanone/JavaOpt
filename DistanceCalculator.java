@@ -10,6 +10,9 @@ public class DistanceCalculator
 	 */
 	double[] y;
 
+	/**
+	 * Constructor.
+	 */
 	public DistanceCalculator(double[] x, double[] y)
 	{
 		this.x = x;
@@ -17,7 +20,7 @@ public class DistanceCalculator
 	}
 
 	/**
-	 * Computes the Euclidean distance between the vectors.
+	 * Computes the Euclidean distance between two vectors.
 	 * @return the Euclidean distance.
 	 */
 	public double euclideanDistance()
