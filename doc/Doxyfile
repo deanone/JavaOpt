@@ -51,7 +51,7 @@ PROJECT_BRIEF          = "Native Java implementation of the Particle Swarm Optim
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = /home/asal/Desktop/staff/asal_code/PSO/pso.jpeg
+PROJECT_LOGO           = /home/asal/Desktop/staff/asal_code/PSO/misc/pso.jpeg
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
@@ -995,7 +995,7 @@ USE_MDFILE_AS_MAINPAGE =
 # also VERBATIM_HEADERS is set to NO.
 # The default value is: NO.
 
-SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = YES
 
 # Setting the INLINE_SOURCES tag to YES will include the body of functions,
 # classes and enums directly into the documentation.

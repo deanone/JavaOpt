@@ -1,4 +1,4 @@
 var class_p_s_o_properties_parser =
 [
-    [ "readPropValues", "class_p_s_o_properties_parser.html#ada14427c13fa9eb803da420099dcd0c6", null ]
+    [ "readPropertiesValues", "class_p_s_o_properties_parser.html#a3165e06c1942985eaac001b29648b8c8", null ]
 ];
