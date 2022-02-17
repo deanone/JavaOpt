@@ -198,13 +198,13 @@ public class PSO
      */
     public void printSolution()
     {
-        System.out.print("Solution: g=[");
+        System.out.print("\nSolution: g = [");
         System.out.print(g[0]);
         for (int i = 1; i < g.length; ++i)
         {
-            System.out.print("," + g[i]);
+            System.out.print(", " + g[i]);
         }
-        System.out.println("]");
+        System.out.println("]\n");
     }
     
     /**
@@ -281,15 +281,15 @@ public class PSO
     
     /**
      * Starting point of the application.
-     * TODO: To check and (possibly) refactor the following classes:
-     * 1. PSO
      */
     public static void main(String[] args)
     {
         PSO pso = new PSO();
         pso.run();
         pso.printSolution();
+
         System.out.println("Optimum objective function value for solution g: " + pso.f.f(pso.getSolution()));
+        
         System.exit(0);
     }
 }
