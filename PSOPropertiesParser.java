@@ -12,7 +12,7 @@ public class PSOPropertiesParser
     /**
      * Reads the values of the properties from the properties file.
      */
-    public void readPropValues()
+    public void readPropertiesValues()
     {
         try
         {

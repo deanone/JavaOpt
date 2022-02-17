@@ -31,12 +31,12 @@ public class PSO
     int maxNumOfIterations;
 
     /**
-     * 
+     * The lower bound of the interval from which the random values of the particles are generated.
      */
     double lowerBound;
 
     /**
-     * 
+     * The upper bound of the interval from which the random values of the particles are generated.
      */
     double upperBound;
 
@@ -68,7 +68,7 @@ public class PSO
         try
         {
             psopp = new PSOPropertiesParser();
-            psopp.readPropValues();
+            psopp.readPropertiesValues();
             this.f = new FunctionToOptimize(psopp.getPropertyAsInteger("fType"));
             this.particles = new ArrayList<Particle>();
             this.numParticles = psopp.getPropertyAsInteger("numParticles");
