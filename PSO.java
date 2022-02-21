@@ -198,13 +198,16 @@ public class PSO
      */
     public void printSolution()
     {
-        System.out.print("\nSolution: g = [");
-        System.out.print(g[0]);
+        System.out.println();
+        System.out.println("<------------------------ Solution ------------------------>");
+        System.out.print("g = [");
+        System.out.printf("%.4f", g[0]);
         for (int i = 1; i < g.length; ++i)
         {
-            System.out.print(", " + g[i]);
+            System.out.printf(", %.4f", g[i]);
         }
-        System.out.println("]\n");
+        System.out.println("]");
+        System.out.println("<---------------------------------------------------------->");
     }
     
     /**
@@ -233,7 +236,7 @@ public class PSO
         gOld = Arrays.copyOf(g, g.length);
         while (iter < maxNumOfIterations)
         {
-            System.out.println("Iteration " + (iter + 1));
+            System.out.println("Iteration: " + (iter + 1));
             for (int i = 0; i < numParticles; ++i)
             {
                 Particle particle = particles.get(i);
@@ -288,7 +291,7 @@ public class PSO
         pso.run();
         pso.printSolution();
 
-        System.out.println("Optimum objective function value for solution g: " + pso.f.f(pso.getSolution()));
+        //System.out.printf("\nOptimum objective function value for solution g: %.4f\n", pso.f.f(pso.getSolution()));
         
         System.exit(0);
     }
