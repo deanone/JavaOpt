@@ -23,7 +23,7 @@ public class PSOPropertiesParser {
             propertiesMap = new HashMap<String, String>();
             Properties prop = new Properties();
             String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
-            String propFilename = cwd + "/PSO.properties";
+            String propFilename = cwd + "\\PSO.properties";
             InputStream inputStream =  new FileInputStream(propFilename);
 
             if (inputStream != null) {
@@ -32,9 +32,9 @@ public class PSOPropertiesParser {
                 // set the properties' values
                 propertiesMap.put("fType", prop.getProperty("fType"));
                 propertiesMap.put("numParticles", prop.getProperty("numParticles"));
-                propertiesMap.put("d", prop.getProperty("d"));
+                propertiesMap.put("dimension", prop.getProperty("dimension"));
                 propertiesMap.put("tol", prop.getProperty("tol"));
-                propertiesMap.put("maxNumOfIterations", prop.getProperty("maxNumOfIterations"));
+                propertiesMap.put("maxNumIterations", prop.getProperty("maxNumIterations"));
                 propertiesMap.put("lowerBound", prop.getProperty("lowerBound"));
                 propertiesMap.put("upperBound", prop.getProperty("upperBound"));
                 propertiesMap.put("w", prop.getProperty("w"));

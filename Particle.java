@@ -40,6 +40,8 @@ public class Particle
      * The best position of the particle.
      */
     double[] bestPosition;
+    
+    Random randomNumberGenerator;
 
     /**
      * Constructor.
@@ -47,10 +49,12 @@ public class Particle
      * @param lowerBound the lower bound of the interval from which the initial random values of the Particle are generated.
      * @param upperBound the upper bound of the interval from which the initial random values of the Particle are generated.
      */
-    public Particle(int dimension, double lowerBound, double upperBound) {
+    public Particle(int dimension, double lowerBound, double upperBound, Random randomNumberGenerator) {
         this.dimension = dimension;
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
+        this.randomNumberGenerator = randomNumberGenerator;
+        
         this.position = new double[dimension];
         this.velocity = new double[dimension];
         this.bestPosition = new double[dimension];
@@ -60,11 +64,10 @@ public class Particle
      * Initializes the particle.
      */
     public void initialize() {
-        Random r = new Random();
-        
+    	randomNumberGenerator.setSeed(42);	// for reproducibility of the results
         // initialize position
         for (int i = 0; i < position.length; ++i) {
-            position[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+            position[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
         }
         
         // initialize best position
@@ -74,7 +77,7 @@ public class Particle
         double vUpperBound = Math.abs(upperBound - lowerBound);
         double vLowerBound = (-1.0) * vUpperBound;
         for (int i = 0; i < velocity.length; ++i) {
-            velocity[i] = vLowerBound + (r.nextDouble() * (vUpperBound - vLowerBound));
+            velocity[i] = vLowerBound + (randomNumberGenerator.nextDouble() * (vUpperBound - vLowerBound));
         }
     }
     

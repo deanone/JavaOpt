@@ -63,6 +63,8 @@ public class PSO {
      * The solution estimated by the PSO method.
      */
     double[] solution;
+    
+    Random randomNumberGenerator;
 
     /**
      * Constructor.
@@ -75,25 +77,27 @@ public class PSO {
             this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
             this.swarm = new ArrayList<Particle>();
             this.numParticles = psoPropertiesParser.getPropertyAsInteger("numParticles");
-            this.dimension = psoPropertiesParser.getPropertyAsInteger("d");
+            this.dimension = psoPropertiesParser.getPropertyAsInteger("dimension");
             this.tol = psoPropertiesParser.getPropertyAsDouble("tol");
-            this.maxNumIterations = psoPropertiesParser.getPropertyAsInteger("maxNumOfIterations");
+            this.maxNumIterations = psoPropertiesParser.getPropertyAsInteger("maxNumIterations");
             this.lowerBound = psoPropertiesParser.getPropertyAsDouble("lowerBound");
             this.upperBound = psoPropertiesParser.getPropertyAsDouble("upperBound");
             this.w = psoPropertiesParser.getPropertyAsDouble("w");
             this.phiP = psoPropertiesParser.getPropertyAsDouble("phiP");
             this.phiG = psoPropertiesParser.getPropertyAsDouble("phiG");
+            Random randomNumberGenerator = new Random();
+            randomNumberGenerator.setSeed(42); // for reproducibility of the results
 
             // construct initial particles
             for (int particleIndex = 0; particleIndex < this.numParticles; ++particleIndex) {
-                addParticle(new Particle(this.dimension, this.lowerBound, this.upperBound));
+                addParticle(new Particle(this.dimension, this.lowerBound, this.upperBound, randomNumberGenerator));
             }
-
+            
             // initialize solution vector
             solution = new double[dimension];
-            Random r = new Random();
+            
             for (int i = 0; i < solution.length; ++i) {
-            	solution[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+            	solution[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
             }
         } catch (Exception e) {
             System.out.println("Exception: " + e);
@@ -202,7 +206,7 @@ public class PSO {
     public void run() {
         // initialization
         for (int particleIndex = 0; particleIndex < numParticles; ++particleIndex) {
-            Particle particle = swarm.get(particleIndex);
+        	Particle particle = swarm.get(particleIndex);
             particle.initialize();
             double[] particlePosition = particle.getPosition();
             double funcValueAtParticlePosition = funcToOptimize.evaluate(particlePosition);
