@@ -77,7 +77,7 @@ public class PSO {
         	// read properties of the algorithm from a properties file
             psoPropertiesParser = new PSOPropertiesParser();
             psoPropertiesParser.readPropertiesValues();
-            this.f = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
+            this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
             this.swarm = new ArrayList<Particle>();
             this.numParticles = psoPropertiesParser.getPropertyAsInteger("numParticles");
             this.dimension = psoPropertiesParser.getPropertyAsInteger("d");
@@ -210,8 +210,8 @@ public class PSO {
             Particle particle = swarm.get(particleIndex);
             particle.initialize();
             double[] particlePosition = particle.getPosition();
-            double funcValueAtParticlePosition = funcToOptimize.f(particlePosition);
-            double funcValueAtSolution = funcToOptimize.f(solution);         
+            double funcValueAtParticlePosition = funcToOptimize.evaluate(particlePosition);
+            double funcValueAtSolution = funcToOptimize.evaluate(solution);         
             if (funcValueAtParticlePosition < funcValueAtSolution) {
                 solution = Arrays.copyOf(particlePosition, particlePosition.length);
             }
@@ -240,12 +240,11 @@ public class PSO {
                 }
 
                 
-                if (funcToOptimize.f(position) < funcToOptimize.f(bestPosition)) {
+                if (funcToOptimize.evaluate(position) < funcToOptimize.evaluate(bestPosition)) {
                     // Update the particle's best known position
                     particle.setBestPosition(position);
                     bestPosition = particle.getBestPosition();
-                    if (funcToOptimize.f(bestPosition) < funcToOptimize.f(solution))
-                    {
+                    if (funcToOptimize.evaluate(bestPosition) < funcToOptimize.evaluate(solution)) {
                         // Update the swarm's best known position
                         solution = Arrays.copyOf(bestPosition, bestPosition.length);
                     }
