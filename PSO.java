@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import com.sun.org.apache.bcel.internal.generic.DDIV;
+
 import java.lang.Math;
 import java.io.IOException;
 
@@ -9,12 +12,12 @@ import java.io.IOException;
  * @version 0.1
  * @since 2020-04-25
  *
- * PSO class: The class representing the PSO method
+ * PSO class: The class representing the PSO method.
  */
-public class PSO  {
-    PSOPropertiesParser psopp;
-    FunctionToOptimize f;
-    ArrayList<Particle> particles;
+public class PSO {
+    PSOPropertiesParser psoPropertiesParser;
+    FunctionToOptimize funcToOptimize;
+    ArrayList<Particle> swarm;
 
     /**
      * The number of particles.
@@ -24,7 +27,7 @@ public class PSO  {
     /**
      * The dimension of particles.
      */
-    int d;
+    int dimension;
 
     /**
      * The tolerance for terminating the PSO method.
@@ -34,15 +37,15 @@ public class PSO  {
     /**
      * The maximum number of iterations for the PSO method to terminate.
      */
-    int maxNumOfIterations;
+    int maxNumIterations;
 
     /**
-     * The lower bound of the interval from which the random values of the particles are generated.
+     * The lower bound of the interval from which the initial random values of the particles are generated.
      */
     double lowerBound;
 
     /**
-     * The upper bound of the interval from which the random values of the particles are generated.
+     * The upper bound of the interval from which the initial random values of the particles are generated.
      */
     double upperBound;
 
@@ -64,75 +67,66 @@ public class PSO  {
     /**
      * The solution estimated by the PSO method.
      */
-    double[] g;
+    double[] solution;
 
     /**
      * Constructor.
      */
-    public PSO()
-    {
-        try
-        {
-            psopp = new PSOPropertiesParser();
-            psopp.readPropertiesValues();
-            this.f = new FunctionToOptimize(psopp.getPropertyAsInteger("fType"));
-            this.particles = new ArrayList<Particle>();
-            this.numParticles = psopp.getPropertyAsInteger("numParticles");
-            this.d = psopp.getPropertyAsInteger("d");
-            this.tol = psopp.getPropertyAsDouble("tol");
-            this.maxNumOfIterations = psopp.getPropertyAsInteger("maxNumOfIterations");
-            this.lowerBound = psopp.getPropertyAsDouble("lowerBound");
-            this.upperBound = psopp.getPropertyAsDouble("upperBound");
-            this.w = psopp.getPropertyAsDouble("w");
-            this.phiP = psopp.getPropertyAsDouble("phiP");
-            this.phiG = psopp.getPropertyAsDouble("phiG");
+    public PSO() {
+        try {
+        	// read properties of the algorithm from a properties file
+            psoPropertiesParser = new PSOPropertiesParser();
+            psoPropertiesParser.readPropertiesValues();
+            this.f = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
+            this.swarm = new ArrayList<Particle>();
+            this.numParticles = psoPropertiesParser.getPropertyAsInteger("numParticles");
+            this.dimension = psoPropertiesParser.getPropertyAsInteger("d");
+            this.tol = psoPropertiesParser.getPropertyAsDouble("tol");
+            this.maxNumIterations = psoPropertiesParser.getPropertyAsInteger("maxNumOfIterations");
+            this.lowerBound = psoPropertiesParser.getPropertyAsDouble("lowerBound");
+            this.upperBound = psoPropertiesParser.getPropertyAsDouble("upperBound");
+            this.w = psoPropertiesParser.getPropertyAsDouble("w");
+            this.phiP = psoPropertiesParser.getPropertyAsDouble("phiP");
+            this.phiG = psoPropertiesParser.getPropertyAsDouble("phiG");
 
             // construct initial particles
-            for (int i = 0; i < this.numParticles; ++i)
-            {
-                addParticle(new Particle(this.d, this.lowerBound, this.upperBound));
+            for (int particleIndex = 0; particleIndex < this.numParticles; ++particleIndex) {
+                addParticle(new Particle(this.dimension, this.lowerBound, this.upperBound));
             }
 
-            g = new double[d];
-
+            // initialize solution vector
+            solution = new double[dimension];
             Random r = new Random();
-            for (int i = 0; i < g.length; ++i)
-            {
-                g[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
+            for (int i = 0; i < solution.length; ++i) {
+            	solution[i] = lowerBound + (r.nextDouble() * (upperBound - lowerBound));
             }
-        
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Exception: " + e);
         }
     }
 
     /**
-     * Adds a new particle to the list of particles.
-     * @param p the new particle.
+     * Adds a new particle to the swarm.
+     * @param particle the new particle.
      */
-    public void addParticle(Particle p)
-    {
-        particles.add(p);
+    public void addParticle(Particle particle) {
+        swarm.add(particle);
     }
 
     /**
-     * Returns a particle from the list of particles.
-     * @param i the index of the particle to return.
+     * Returns a particle from the swarm.
+     * @param particleIndex the index of the particle to return.
      * @return the particle at the input index.
      */
-    public Particle getParticle(int i)
-    {
-        return particles.get(i);
+    public Particle getParticle(int particleIndex) {
+        return swarm.get(particleIndex);
     }
     
     /**
      * Returns the number of particles.
      * @return the number of particles.
      */
-    public int getNumParticles()
-    {
+    public int getNumParticles() {
         return numParticles;
     }
     
@@ -140,17 +134,15 @@ public class PSO  {
      * Returns the dimension of the particles.
      * @return the dimension of the particles.
      */
-    public int getParticlesDimension()
-    {
-        return d;
+    public int getParticlesDimension() {
+        return dimension;
     }
     
     /**
      * Returns the tolerance for terminating the algorithm.
      * @return the tolerance for terminating the algorithm.
      */
-    public double getTol()
-    {
+    public double getTol() {
         return tol;
     }
     
@@ -158,17 +150,15 @@ public class PSO  {
      * Returns the maximum number of iterations for the PSO algorithm to terminate.
      * @return the maximum number of iterations for the PSO algorithm to terminate.
      */
-    public int getMaxNumOfIterations()
-    {
-        return maxNumOfIterations;
+    public int getMaxNumIterations() {
+        return maxNumIterations;
     }
 
     /**
      * Returns the inertia weight.
      * @return the inertia weight.
      */
-    public double getW()
-    {
+    public double getW() {
         return w;
     }
     
@@ -176,8 +166,7 @@ public class PSO  {
      * Returns the phiP parameter.
      * @return the phiP parameter.
      */
-    public double getPhiP()
-    {
+    public double getPhiP() {
         return phiP;
     }
     
@@ -185,8 +174,7 @@ public class PSO  {
      * Returns the phiG parameter.
      * @return the phiG parameter.
      */
-    public double getPhiG()
-    {
+    public double getPhiG() {
         return phiG;
     }
 
@@ -194,23 +182,20 @@ public class PSO  {
      * Returns the solution.
      * @return the solution.
      */
-    public double[] getSolution()
-    {
-        return g;
+    public double[] getSolution() {
+        return solution;
     }
 
     /**
      * Prints the solution.
      */
-    public void printSolution()
-    {
+    public void printSolution() {
         System.out.println();
         System.out.println("<------------------------ Solution ------------------------>");
         System.out.print("g = [");
-        System.out.printf("%.4f", g[0]);
-        for (int i = 1; i < g.length; ++i)
-        {
-            System.out.printf(", %.4f", g[i]);
+        System.out.printf("%.4f", solution[0]);
+        for (int solutionElementIndex = 1; solutionElementIndex < solution.length; ++solutionElementIndex) {
+            System.out.printf(", %.4f", solution[solutionElementIndex]);
         }
         System.out.println("]");
         System.out.println("<---------------------------------------------------------->");
@@ -219,71 +204,61 @@ public class PSO  {
     /**
      * Runs the iterative PSO procedure.
      */
-    public void run()
-    {
+    public void run() {
         // initialization
-        for (int i = 0; i < numParticles; ++i)
-        {
-            Particle particle = particles.get(i);
+        for (int particleIndex = 0; particleIndex < numParticles; ++particleIndex) {
+            Particle particle = swarm.get(particleIndex);
             particle.initialize();
-            double[] p = particle.p();
-            double fp = f.f(p);
-            double fg = f.f(g);         
-            if (fp < fg)
-            {
-                g = Arrays.copyOf(p, p.length);
+            double[] particlePosition = particle.getPosition();
+            double funcValueAtParticlePosition = funcToOptimize.f(particlePosition);
+            double funcValueAtSolution = funcToOptimize.f(solution);         
+            if (funcValueAtParticlePosition < funcValueAtSolution) {
+                solution = Arrays.copyOf(particlePosition, particlePosition.length);
             }
         }
         
         // main iteration loop
-        Random r = new Random();
-        int iter = 0;
-        double[] gOld = new double[g.length];
-        gOld = Arrays.copyOf(g, g.length);
-        while (iter < maxNumOfIterations)
-        {
-            System.out.println("Iteration: " + (iter + 1));
-            for (int i = 0; i < numParticles; ++i)
-            {
-                Particle particle = particles.get(i);
+        Random randomNumberGenerator = new Random();
+        int iterationsIndex = 0;
+        double[] solutionOld = new double[solution.length];
+        solutionOld = Arrays.copyOf(solution, solution.length);
+        while (iterationsIndex < maxNumIterations) {
+            System.out.println("Iteration: " + (iterationsIndex + 1));
+            for (int particleIndex = 0; particleIndex < numParticles; ++particleIndex) {
                 
-                double[] v = particle.v();
-                double[] x = particle.x();
-                double[] p = particle.p();
+            	Particle particle = swarm.get(particleIndex);
+                
+            	double[] position = particle.getPosition();
+            	double[] velocity = particle.getVelocity();
+                double[] bestPosition = particle.getBestPosition();
                                 
-                for (int j = 0; j < d; ++j)
-                {
-                    double rp = r.nextDouble();
-                    double rg = r.nextDouble();
-                    v[j] = w * v[j] + phiP * rp * (p[j] - x[j]) + phiG * rg * (g[j] - x[j]);
-                    x[j] = x[j] + v[j];
+                for (int j = 0; j < dimension; ++j) {
+                    double rp = randomNumberGenerator.nextDouble();
+                    double rg = randomNumberGenerator.nextDouble();
+                    velocity[j] = w * velocity[j] + phiP * rp * (bestPosition[j] - position[j]) + phiG * rg * (solution[j] - position[j]);
+                    position[j] = position[j] + velocity[j];
                 }
 
                 
-                if (f.f(x) < f.f(p))
-                {
+                if (funcToOptimize.f(position) < funcToOptimize.f(bestPosition)) {
                     // Update the particle's best known position
-                    particle.p(x);
-                    p = particle.p();
-                    if (f.f(p) < f.f(g))
+                    particle.setBestPosition(position);
+                    bestPosition = particle.getBestPosition();
+                    if (funcToOptimize.f(bestPosition) < funcToOptimize.f(solution))
                     {
                         // Update the swarm's best known position
-                        g = Arrays.copyOf(p, d);
+                        solution = Arrays.copyOf(bestPosition, bestPosition.length);
                     }
                 }
             }
 
-            DistanceCalculator dc = new DistanceCalculator(gOld, g);
-            double dist = dc.euclideanDistance();
-
-            if (dist < tol)
-            {
+            DistanceCalculator distanceCalculator = new DistanceCalculator(solutionOld, solution);
+            double dist = distanceCalculator.euclideanDistance();
+            if (dist < tol) {
                 break;
-            }
-            else
-            {
-                gOld = Arrays.copyOf(g, g.length);
-                iter++;
+            } else {
+                solutionOld = Arrays.copyOf(solution, solution.length);
+                iterationsIndex++;
             }
         }
     }
@@ -291,8 +266,7 @@ public class PSO  {
     /**
      * Starting point of the application.
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         PSO pso = new PSO();
         pso.run();
         pso.printSolution();
