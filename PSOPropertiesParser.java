@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 
 /**
  * @author A. Salamanis
- * @version 0.1
+ * @version 0.2
  * @since 2020-04-25
  *
- * PSOPropertiesParser class: The class representing a properties file (.properties) parse.
+ * PSOPropertiesParser class: A class representing a properties file (.properties) parser.
  */
 public class PSOPropertiesParser {
     HashMap<String, String> propertiesMap;

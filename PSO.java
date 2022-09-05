@@ -2,14 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.sun.org.apache.bcel.internal.generic.DDIV;
-
-import java.lang.Math;
-import java.io.IOException;
-
 /**
  * @author A. Salamanis
- * @version 0.1
+ * @version 0.2
  * @since 2020-04-25
  *
  * PSO class: The class representing the PSO method.

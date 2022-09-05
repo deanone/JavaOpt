@@ -1,6 +1,6 @@
 /**
  * @author A. Salamanis
- * @version 0.1
+ * @version 0.2
  * @since 2020-04-25
  *
  * FunctionToOptimize class: The class representing a function to be optimized.

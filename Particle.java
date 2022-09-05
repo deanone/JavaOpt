@@ -4,7 +4,7 @@ import java.lang.Math;
 
 /**
  * @author A. Salamanis
- * @version 0.1
+ * @version 0.2
  * @since 2020-04-25
  *
  * Particle class: The class representing a particle, i.e., a candidate solution.
