@@ -4,8 +4,14 @@ import java.util.Random;
 import java.lang.Math;
 import java.io.IOException;
 
-public class PSO 
-{
+/**
+ * @author A. Salamanis
+ * @version 0.1
+ * @since 2020-04-25
+ *
+ * PSO class: The class representing the PSO method
+ */
+public class PSO  {
     PSOPropertiesParser psopp;
     FunctionToOptimize f;
     ArrayList<Particle> particles;
