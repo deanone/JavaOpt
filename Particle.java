@@ -9,12 +9,11 @@ import java.lang.Math;
  *
  * Particle class: The class representing a particle, i.e., a candidate solution.
  */
-public class Particle 
-{
-    /**
-     * The dimension of the particle.
-     */
+public class Particle {
     int dimension;
+    double[] position;
+    double[] velocity;
+    double[] bestPosition;
 
     /**
      * The lower bound of the interval from which the initial random values of the Particle are generated.
@@ -25,21 +24,6 @@ public class Particle
      * The upper bound of the interval from which the initial random values of the Particle are generated.
      */
     double upperBound;
-    
-    /**
-     * The position of the particle.
-     */
-    double[] position;
-    
-    /**
-     * The velocity of the particle.
-     */
-    double[] velocity;
-    
-    /**
-     * The best position of the particle.
-     */
-    double[] bestPosition;
     
     Random randomNumberGenerator;
 

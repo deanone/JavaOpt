@@ -13,25 +13,9 @@ public class PSO {
     PSOPropertiesParser psoPropertiesParser;
     FunctionToOptimize funcToOptimize;
     ArrayList<Particle> swarm;
-
-    /**
-     * The number of particles.
-     */
     int numParticles;
-
-    /**
-     * The dimension of particles.
-     */
     int dimension;
-
-    /**
-     * The tolerance for terminating the PSO method.
-     */
     double tol;
-
-    /**
-     * The maximum number of iterations for the PSO method to terminate.
-     */
     int maxNumIterations;
 
     /**
@@ -59,9 +43,6 @@ public class PSO {
      */
     double phiG;
 
-    /**
-     * The solution estimated by the PSO method.
-     */
     double[] solution;
     
     Random randomNumberGenerator;
@@ -191,6 +172,9 @@ public class PSO {
     public void printSolution() {
         System.out.println();
         System.out.println("<------------------------ Solution ------------------------>");
+        char[] spaces = new char[17];
+        Arrays.fill(spaces, ' ');
+        System.out.print(new String(spaces));
         System.out.print("g = [");
         System.out.printf("%.4f", solution[0]);
         for (int solutionElementIndex = 1; solutionElementIndex < solution.length; ++solutionElementIndex) {
@@ -222,7 +206,8 @@ public class PSO {
         double[] solutionOld = new double[solution.length];
         solutionOld = Arrays.copyOf(solution, solution.length);
         while (iterationsIndex < maxNumIterations) {
-            System.out.println("Iteration: " + (iterationsIndex + 1));
+        	String funcValueForSolution = String.format("%.03f", funcToOptimize.evaluate(solution));
+            System.out.println("Iteration " + (iterationsIndex + 1) + ": f(x) -> " + funcValueForSolution);
             for (int particleIndex = 0; particleIndex < numParticles; ++particleIndex) {
                 
             	Particle particle = swarm.get(particleIndex);

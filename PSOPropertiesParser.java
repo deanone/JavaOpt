@@ -18,8 +18,7 @@ public class PSOPropertiesParser {
      * Reads the values of the properties from the properties file.
      */
     public void readPropertiesValues() {
-        try
-        {
+        try {
             propertiesMap = new HashMap<String, String>();
             Properties prop = new Properties();
             String cwd = Paths.get(".").toAbsolutePath().normalize().toString();

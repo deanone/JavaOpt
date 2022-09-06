@@ -12,8 +12,7 @@ public class DistanceCalculator {
     /**
      * Constructor.
      */
-    public DistanceCalculator(double[] firstVector, double[] secondVector)
-    {
+    public DistanceCalculator(double[] firstVector, double[] secondVector) {
         this.firstVector = firstVector;
         this.secondVector = secondVector;
     }
@@ -31,7 +30,7 @@ public class DistanceCalculator {
             dist = Math.sqrt(dist);
             return dist;
         } else {
-        	return -1.0;	// error value
+        	return -1.0; // error value
         }
     }
 }
