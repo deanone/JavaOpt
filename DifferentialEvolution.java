@@ -6,22 +6,23 @@ public class DifferentialEvolution {
 	PSOPropertiesParser psoPropertiesParser;
 	int dimension;
 	int populationSize;
-	double crossoverProbability;
-	double differentialWeight;
+	double tol;
+	int maxNumIterations;
 	double lowerBound;
 	double upperBound;
-	
+	double crossoverProbability;
+	double differentialWeight;
+
 	ArrayList<Agent> swarm;
 	FunctionToOptimize funcToOptimize;
-	int maxNumIterations;
-	double tol;
+	
 	double[] solution;
 	Random randomNumberGenerator;
-	
-	void addAgent(Agent agent) {
-		swarm.add(agent);
-	}
-	
+		
+	/**
+	 * Constructor.
+	 * @param propertiesFilename the name of the properties file that contains the properties of the method.
+	 */
 	public DifferentialEvolution(String propertiesFilename) {
 		try {
         	// read properties of the algorithm from a properties file
@@ -57,6 +58,17 @@ public class DifferentialEvolution {
 		}
 	}
 	
+	/**
+	 * Adds a new agent to the swarm.
+	 * @param agent the new agent to be added.
+	 */
+	public void addAgent(Agent agent) {
+		swarm.add(agent);
+	}
+	
+    /**
+     * Runs the iterative Differential Evolution (DE) procedure.
+     */
 	public void run() {
 		double[] oldSolution = Arrays.copyOf(solution, solution.length);
 		double funcValueAtOldSolution = funcToOptimize.evaluate(oldSolution);
@@ -123,19 +135,15 @@ public class DifferentialEvolution {
 	        		
 	        	}
 	        }
-	        
             DistanceCalculator distanceCalculator = new DistanceCalculator(oldSolution, solution);
             double dist = distanceCalculator.euclideanDistance();
             if (dist < tol) {
                 break;
             } else {
-            	oldSolution = solution;
+            	oldSolution = Arrays.copyOf(solution, solution.length);
             	funcValueAtOldSolution = funcToOptimize.evaluate(oldSolution);
                 iterationsIndex++;
             }
-            
-            
-	        
 		}
 	}
 	
