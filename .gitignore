@@ -3,3 +3,5 @@
 /PSO.class
 /PSOPropertiesParser.class
 /Particle.class
+/Agent.class
+/DifferentialEvolution.class

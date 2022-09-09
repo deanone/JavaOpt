@@ -11,19 +11,7 @@ import java.util.Random;
 public class Agent {
     int dimension;
     double[] position;
-    
-    /**
-     * The lower bound of the interval from which the initial random values of the Particle are generated.
-     */
-    double lowerBound;
-    
-    /**
-     * The upper bound of the interval from which the initial random values of the Particle are generated.
-     */
-    double upperBound;
-    
-    Random randomNumberGenerator;
-    
+        
     /**
      * Constructor.
      * @param dimension the dimension of the particle.
@@ -32,23 +20,12 @@ public class Agent {
      */
     public Agent(int dimension, double lowerBound, double upperBound, Random randomNumberGenerator) {
         this.dimension = dimension;
-        this.lowerBound = lowerBound;
-        this.upperBound = upperBound;
-        this.randomNumberGenerator = randomNumberGenerator;
         this.position = new double[dimension];
-    }
-    
-    /**
-     * Initializes the agent.
-     */
-    public void initialize() {
-    	randomNumberGenerator.setSeed(42);	// for reproducibility of the results
-        // initialize position
         for (int i = 0; i < position.length; ++i) {
             position[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
         }
     }
-    
+        
     /**
      * Sets the dimension of the agent.
      * @param dimension the dimension of the agent.
