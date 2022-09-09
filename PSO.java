@@ -50,10 +50,10 @@ public class PSO {
     /**
      * Constructor.
      */
-    public PSO() {
+    public PSO(String propertiesFilename) {
         try {
         	// read properties of the algorithm from a properties file
-            psoPropertiesParser = new PSOPropertiesParser();
+            psoPropertiesParser = new PSOPropertiesParser(propertiesFilename);
             psoPropertiesParser.readPropertiesValues();
             this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
             this.swarm = new ArrayList<Particle>();
@@ -244,18 +244,5 @@ public class PSO {
                 iterationsIndex++;
             }
         }
-    }
-    
-    /**
-     * Starting point of the application.
-     */
-    public static void main(String[] args) {
-        PSO pso = new PSO();
-        pso.run();
-        pso.printSolution();
-
-        //System.out.printf("\nOptimum objective function value for solution g: %.4f\n", pso.f.f(pso.getSolution()));
-        
-        System.exit(0);
     }
 }
