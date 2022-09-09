@@ -6,7 +6,7 @@ import java.util.Random;
  * @version 0.2
  * @since 2020-04-25
  *
- * Agent class: The class representing an agent, i.e., a candidate solution.
+ * Agent class: The class that represents an agent, i.e., a candidate solution.
  */
 public class Agent {
     int dimension;
@@ -15,8 +15,8 @@ public class Agent {
     /**
      * Constructor.
      * @param dimension the dimension of the particle.
-     * @param lowerBound the lower bound of the interval from which the initial random values of the Particle are generated.
-     * @param upperBound the upper bound of the interval from which the initial random values of the Particle are generated.
+     * @param lowerBound the lower bound of the interval from which the initial random values of the Agent are generated.
+     * @param upperBound the upper bound of the interval from which the initial random values of the Agent are generated.
      */
     public Agent(int dimension, double lowerBound, double upperBound, Random randomNumberGenerator) {
         this.dimension = dimension;
@@ -44,7 +44,7 @@ public class Agent {
     
     /**
      * Sets the position of the agent.
-     * @param x the position of the agent.
+     * @param position the position of the agent.
      */
     public void setPosition(double[] position) {
         this.position = Arrays.copyOf(position, position.length);
