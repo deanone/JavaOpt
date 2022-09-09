@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import java.util.HashMap;
@@ -10,12 +11,15 @@ import java.nio.file.Paths;
  * @version 0.2
  * @since 2020-04-25
  *
- * PSOPropertiesParser class: A class representing a properties file (.properties) parser.
+ * PSOPropertiesParser class: A class representing a parser of a properties file (i.e., .properties).
  */
 public class PSOPropertiesParser {
 	String propertiesFilename;
     HashMap<String, String> propertiesMap;
     
+    /**
+     * Constructor.
+     */
     public PSOPropertiesParser(String propertiesFilename) {
     	String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
     	this.propertiesFilename = cwd + propertiesFilename;
@@ -27,8 +31,7 @@ public class PSOPropertiesParser {
     public void readPropertiesValues() {
         try {
             propertiesMap = new HashMap<String, String>();
-            File file =  new File(propertiesFilename);
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(new File(propertiesFilename));
             boolean headerLine = true;
             while (sc.hasNextLine()) {
             	if (headerLine) {
@@ -38,15 +41,18 @@ public class PSOPropertiesParser {
             	}
             	String line = sc.nextLine();
             	String[] items = line.split("=");
-            	
             	propertiesMap.put(items[0], items[1]);
             }
             sc.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+        	// TODO: Better handle the case when file is missing
             System.out.println("Exception: " + e);
         }
     }
     
+    /**
+     * Prints the properties parsed from the properties file. 
+     */
     public void printPropertiesMap() {
     	for (Map.Entry<String, String> set : propertiesMap.entrySet()) {
     		System.out.println(set.getKey() + '=' + set.getValue());
