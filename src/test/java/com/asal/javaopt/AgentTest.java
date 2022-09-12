@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
  *
  * AgentTest class: The class that tests the Agent class.
  */
-public class AgentTest {
+@DisplayName("The class that tests the Agent class.")
+class AgentTest {
 	Agent agent;
 	
 	@BeforeEach
@@ -47,5 +48,4 @@ public class AgentTest {
 		boolean equal = Arrays.equals(currentPosition, testPosition);
 		assertTrue(equal);
 	}
-
 }
