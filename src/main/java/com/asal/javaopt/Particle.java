@@ -1,3 +1,4 @@
+package com.asal.javaopt;
 import java.util.Arrays;
 import java.util.Random;
 import java.lang.Math; 

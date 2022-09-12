@@ -1,3 +1,4 @@
+package com.asal.javaopt;
 /**
  * @author A. Salamanis
  * @version 0.2

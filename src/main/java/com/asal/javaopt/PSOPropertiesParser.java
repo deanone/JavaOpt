@@ -1,3 +1,4 @@
+package com.asal.javaopt;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -22,6 +23,7 @@ public class PSOPropertiesParser {
      */
     public PSOPropertiesParser(String propertiesFilename) {
     	String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
+    	System.out.println(cwd);
     	this.propertiesFilename = cwd + propertiesFilename;
     }
     
