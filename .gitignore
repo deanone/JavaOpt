@@ -1,7 +1,2 @@
-/DistanceCalculator.class
-/FunctionToOptimize.class
-/PSO.class
-/PSOPropertiesParser.class
-/Particle.class
-/Agent.class
-/DifferentialEvolution.class
+build/
+bin/
