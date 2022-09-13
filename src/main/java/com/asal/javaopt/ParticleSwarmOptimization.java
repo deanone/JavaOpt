@@ -10,8 +10,8 @@ import java.util.Random;
  *
  * PSO class: The class representing the PSO method.
  */
-public class PSO {
-    PSOPropertiesParser psoPropertiesParser;
+public class ParticleSwarmOptimization {
+    PropertiesParser psoPropertiesParser;
     FunctionToOptimize funcToOptimize;
     ArrayList<Particle> swarm;
     int numParticles;
@@ -51,10 +51,10 @@ public class PSO {
     /**
      * Constructor.
      */
-    public PSO(String propertiesFilename) {
+    public ParticleSwarmOptimization(String propertiesFilename) {
         try {
         	// read properties of the algorithm from a properties file
-            psoPropertiesParser = new PSOPropertiesParser(propertiesFilename);
+            psoPropertiesParser = new PropertiesParser(propertiesFilename);
             psoPropertiesParser.readPropertiesValues();
             this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
             this.swarm = new ArrayList<Particle>();

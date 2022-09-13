@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class DifferentialEvolution {
-	PSOPropertiesParser psoPropertiesParser;
+	PropertiesParser psoPropertiesParser;
 	int dimension;
 	int populationSize;
 	double tol;
@@ -27,7 +27,7 @@ public class DifferentialEvolution {
 	public DifferentialEvolution(String propertiesFilename) {
 		try {
         	// read properties of the algorithm from a properties file
-            psoPropertiesParser = new PSOPropertiesParser(propertiesFilename);
+            psoPropertiesParser = new PropertiesParser(propertiesFilename);
             psoPropertiesParser.readPropertiesValues();
             
             this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));

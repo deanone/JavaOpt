@@ -14,14 +14,14 @@ import java.nio.file.Paths;
  *
  * PSOPropertiesParser class: A class representing a parser of a properties file (i.e., .properties).
  */
-public class PSOPropertiesParser {
+public class PropertiesParser {
 	String propertiesFilename;
     HashMap<String, String> propertiesMap;
     
     /**
      * Constructor.
      */
-    public PSOPropertiesParser(String propertiesFilename) {
+    public PropertiesParser(String propertiesFilename) {
     	String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
     	System.out.println(cwd);
     	this.propertiesFilename = cwd + propertiesFilename;
