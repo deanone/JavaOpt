@@ -24,7 +24,8 @@ class AgentTest {
 		double lowerBound = -1.0;
 		double upperBound = -1.0; 
 		Random randomNumberGenerator = new Random();
-		agent = new Agent(dimension, lowerBound, upperBound, randomNumberGenerator);
+		agent = new Agent(dimension);
+		agent.initialize(lowerBound, upperBound, randomNumberGenerator);
 	}
 	
 	@Test
