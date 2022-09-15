@@ -17,10 +17,12 @@ public class OptimizerRunner {
 		pso.run();
 		pso.printSolution();
 		
-//    	String propertiesFilename = "\\de.properties";
-//        DifferentialEvolution differentialEvolutionMethod = new DifferentialEvolution(propertiesFilename);
-//        differentialEvolutionMethod.run();
-//        differentialEvolutionMethod.printSolution();
+		System.out.println();
+		
+    	propertiesFilename = "\\de.properties";
+        DifferentialEvolution differentialEvolutionMethod = new DifferentialEvolution(propertiesFilename);
+        differentialEvolutionMethod.run();
+        differentialEvolutionMethod.printSolution();
 		
 		System.exit(0); //TODO: Check if I need this line
 	}

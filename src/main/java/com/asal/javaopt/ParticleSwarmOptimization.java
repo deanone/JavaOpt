@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * PSO class: The class representing the Particle Swarm Optimization (PSO) method.
  */
-class ParticleSwarmOptimization extends Optimizer {
+public class ParticleSwarmOptimization extends Optimizer {
     protected double inertiaWeight;
     protected double cognitiveCoefficient;
     protected double socialCoefficient;

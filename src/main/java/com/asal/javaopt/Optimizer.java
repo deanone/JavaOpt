@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * Optimizer class: The base class that implements a general optimization algorithm.
  */
-class Optimizer {
+public abstract class Optimizer {
 	protected PropertiesParser psoPropertiesParser;
 	protected FunctionToOptimize funcToOptimize;
 	protected int dimension;
@@ -159,6 +159,5 @@ class Optimizer {
         System.out.println("<---------------------------------------------------------->");
     }
     
-    protected void run() {
-    }
+    protected abstract void run();
 }

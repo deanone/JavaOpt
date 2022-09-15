@@ -25,7 +25,6 @@ public class PropertiesParser {
     public PropertiesParser(String propertiesFilename) {
     	String cwd = Paths.get(".").toAbsolutePath().normalize().toString();
     	this.propertiesFilename = cwd + propertiesFilename;
-    	System.out.println(this.propertiesFilename);
     }
     
     /**

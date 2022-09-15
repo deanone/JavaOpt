@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-class DifferentialEvolution extends Optimizer {
+public class DifferentialEvolution extends Optimizer {
 	protected double crossoverProbability;
 	protected double differentialWeight;
 		
