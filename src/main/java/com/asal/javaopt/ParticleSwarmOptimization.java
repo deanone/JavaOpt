@@ -11,33 +11,21 @@ import java.util.Random;
  * PSO class: The class representing the Particle Swarm Optimization (PSO) method.
  */
 class ParticleSwarmOptimization extends Optimizer {
-    /**
-     * The inertia weight.
-     */
-    protected double w;
-
-    /**
-     * The cognitive coefficient.
-     */
-    protected double phiP;
-
-    /**
-     * The social coefficient.
-     */
-    protected double phiG;
-    
-    Random randomNumberGenerator;
+    protected double inertiaWeight;
+    protected double cognitiveCoefficient;
+    protected double socialCoefficient;
 
     /**
      * Constructor.
+     * @param propertiesFilename the name of the properties file that contains the properties of the method.
      */
     protected ParticleSwarmOptimization(String propertiesFilename) {
     	super(propertiesFilename);
     	try {
         	// read properties of the PSO algorithm from a .properties file
-            this.w = psoPropertiesParser.getPropertyAsDouble("w");
-            this.phiP = psoPropertiesParser.getPropertyAsDouble("phiP");
-            this.phiG = psoPropertiesParser.getPropertyAsDouble("phiG");
+            this.inertiaWeight = psoPropertiesParser.getPropertyAsDouble("inertiaWeight");
+            this.cognitiveCoefficient = psoPropertiesParser.getPropertyAsDouble("cognitiveCoefficient");
+            this.socialCoefficient = psoPropertiesParser.getPropertyAsDouble("socialCoefficient");
             double lowerBound = psoPropertiesParser.getPropertyAsDouble("lowerBound");
             double upperBound = psoPropertiesParser.getPropertyAsDouble("upperBound");
             Random randomNumberGenerator = new Random();
@@ -53,33 +41,9 @@ class ParticleSwarmOptimization extends Optimizer {
             System.out.println("Exception: " + e);
         }
     }
-
-    /**
-     * Returns the inertia weight.
-     * @return the inertia weight.
-     */
-    protected double getW() {
-        return w;
-    }
     
     /**
-     * Returns the phiP parameter.
-     * @return the phiP parameter.
-     */
-    protected double getPhiP() {
-        return phiP;
-    }
-    
-    /**
-     * Returns the phiG parameter.
-     * @return the phiG parameter.
-     */
-    protected double getPhiG() {
-        return phiG;
-    }
-    
-    /**
-     * Runs the iterative PSO procedure.
+     * Runs the iterative Particle Swarm Optimization (PSO) procedure.
      */
     protected void run() {
         // initialization
@@ -112,7 +76,7 @@ class ParticleSwarmOptimization extends Optimizer {
                 for (int j = 0; j < dimension; ++j) {
                     double rp = randomNumberGenerator.nextDouble();
                     double rg = randomNumberGenerator.nextDouble();
-                    velocity[j] = w * velocity[j] + phiP * rp * (bestPosition[j] - position[j]) + phiG * rg * (solution[j] - position[j]);
+                    velocity[j] = inertiaWeight * velocity[j] + cognitiveCoefficient * rp * (bestPosition[j] - position[j]) + socialCoefficient * rg * (solution[j] - position[j]);
                     position[j] = position[j] + velocity[j];
                 }
 

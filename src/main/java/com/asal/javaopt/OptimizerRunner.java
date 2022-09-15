@@ -12,15 +12,15 @@ public class OptimizerRunner {
      * Starting point of the application.
      */
 	public static void main(String[] args) {
-//		String propertiesFilename = "\\pso.properties";
-//		ParticleSwarmOptimization pso = new ParticleSwarmOptimization(propertiesFilename);
-//		pso.run();
-//		pso.printSolution();
+		String propertiesFilename = "\\pso.properties";
+		ParticleSwarmOptimization pso = new ParticleSwarmOptimization(propertiesFilename);
+		pso.run();
+		pso.printSolution();
 		
-    	String propertiesFilename = "\\de.properties";
-        DifferentialEvolution differentialEvolutionMethod = new DifferentialEvolution(propertiesFilename);
-        differentialEvolutionMethod.run();
-        differentialEvolutionMethod.printSolution();
+//    	String propertiesFilename = "\\de.properties";
+//        DifferentialEvolution differentialEvolutionMethod = new DifferentialEvolution(propertiesFilename);
+//        differentialEvolutionMethod.run();
+//        differentialEvolutionMethod.printSolution();
 		
 		System.exit(0); //TODO: Check if I need this line
 	}
