@@ -8,25 +8,11 @@ import java.lang.Math;
  * @version 0.2
  * @since 2020-04-25
  *
- * Particle class: The class representing a particle, i.e., a candidate solution.
+ * Particle class: The class representing a particle, i.e., an enhanced candidate solution.
  */
-public class Particle {
-    private int dimension;
-    private double[] position;
+public class Particle extends Agent {
     private double[] velocity;
     private double[] bestPosition;
-
-    /**
-     * The lower bound of the interval from which the initial random values of the Particle are generated.
-     */
-    double lowerBound;
-    
-    /**
-     * The upper bound of the interval from which the initial random values of the Particle are generated.
-     */
-    double upperBound;
-    
-    Random randomNumberGenerator;
 
     /**
      * Constructor.
@@ -34,26 +20,21 @@ public class Particle {
      * @param lowerBound the lower bound of the interval from which the initial random values of the Particle are generated.
      * @param upperBound the upper bound of the interval from which the initial random values of the Particle are generated.
      */
-    public Particle(int dimension, double lowerBound, double upperBound, Random randomNumberGenerator) {
-        this.dimension = dimension;
-        this.lowerBound = lowerBound;
-        this.upperBound = upperBound;
-        this.randomNumberGenerator = randomNumberGenerator;
-        
-        this.position = new double[dimension];
+    public Particle(int dimension) {
+    	super(dimension);
         this.velocity = new double[dimension];
         this.bestPosition = new double[dimension];
     }
     
     /**
      * Initializes the particle.
+     * @param lowerBound the lower bound of the interval from which the initial random values of the particle are generated.
+     * @param upperBound the upper bound of the interval from which the initial random values of the particle are generated. 
+     * @param randomNumberGenerator a random number generator object.
      */
-    public void initialize() {
-    	randomNumberGenerator.setSeed(42);	// for reproducibility of the results
-        // initialize position
-        for (int i = 0; i < position.length; ++i) {
-            position[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
-        }
+    public void initialize(double lowerBound, double upperBound, Random randomNumberGenerator) {
+    	// initialize position
+    	super.initialize(lowerBound, upperBound, randomNumberGenerator);
         
         // initialize best position
         this.bestPosition = Arrays.copyOf(position, position.length);
@@ -63,51 +44,6 @@ public class Particle {
         double vLowerBound = (-1.0) * vUpperBound;
         for (int i = 0; i < velocity.length; ++i) {
             velocity[i] = vLowerBound + (randomNumberGenerator.nextDouble() * (vUpperBound - vLowerBound));
-        }
-    }
-    
-    /**
-     * Sets the dimension of the particle.
-     * @param dimension the dimension of the particle.
-     */
-    public void setDimension(int dimension) {
-        this.dimension = dimension;
-    }
-    
-    /**
-     * Returns the dimension of the particle.
-     * @return the dimension of the particle.
-     */
-    public int getDimension() {
-        return dimension;
-    }
-    
-    /**
-     * Sets the position of the particle.
-     * @param x the position of the particle.
-     */
-    public void setPosition(double[] position) {
-        this.position = Arrays.copyOf(position, position.length);
-    }
-    
-    /**
-     * Returns the position of the particle.
-     * @return the position of the particle.
-     */
-    public double[] getPosition() {
-        return position;
-    }
-    
-    /**
-     * Returns a specific element from the position vector of the particle.
-     * @param elementIndex the index of the element to return.
-     * @return the specific element from the position vector of the particle.
-     */
-    public double getPositionElement(int elementIndex) {
-        if ((elementIndex >= 0) && (elementIndex < dimension)) {
-            return position[elementIndex];
-        } else {
-            return -1.0;    // TODO: Better handle the case where index is out of array's bounds
         }
     }
     

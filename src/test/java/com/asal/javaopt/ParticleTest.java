@@ -24,17 +24,19 @@ public class ParticleTest {
 		double lowerBound = -1.0;
 		double upperBound = 1.0; 
 		Random randomNumberGenerator = new Random();
-		particle = new Particle(dimension, lowerBound, upperBound, randomNumberGenerator);
+		particle = new Particle(dimension);
+		particle.initialize(lowerBound, upperBound, randomNumberGenerator);
 	}
 	
 	@Test
 	@DisplayName("Testing that particle's position intialized with values from the provided interval.")
 	public void testPositionInitialize() {
-		particle.initialize();
+		double lowerBound = -1.0;
+		double upperBound = 1.0; 
 		double[] position = particle.getPosition();
 		boolean positionCorrectlyInitialized = true;
 		for (int positionIndex = 0; positionIndex < position.length; positionIndex++) {
-			if ((position[positionIndex] < particle.lowerBound) || (position[positionIndex] > particle.upperBound)) {
+			if ((position[positionIndex] < lowerBound) || (position[positionIndex] > upperBound)) {
 				positionCorrectlyInitialized = false;
 				break;
 			}
@@ -45,11 +47,12 @@ public class ParticleTest {
 	@Test
 	@DisplayName("Testing that particle's best position intialized with values from the provided interval.")
 	public void testBestPositionInitialize() {
-		particle.initialize();
+		double lowerBound = -1.0;
+		double upperBound = 1.0; 
 		double[] bestPosition = particle.getBestPosition();
 		boolean bestPositionCorrectlyInitialized = true;
 		for (int bestPositionIndex = 0; bestPositionIndex < bestPosition.length; bestPositionIndex++) {
-			if ((bestPosition[bestPositionIndex] < particle.lowerBound) || (bestPosition[bestPositionIndex] > particle.upperBound)) {
+			if ((bestPosition[bestPositionIndex] < lowerBound) || (bestPosition[bestPositionIndex] > upperBound)) {
 				bestPositionCorrectlyInitialized = false;
 				break;
 			}
@@ -60,11 +63,12 @@ public class ParticleTest {
 	@Test
 	@DisplayName("Testing that particle's velocity intialized with values from the provided interval.")
 	public void testVelocityInitialize() {
-		particle.initialize();
+		double lowerBound = -1.0;
+		double upperBound = 1.0; 
 		double[] velocity = particle.getVelocity();
 		boolean velocityCorrectlyInitialized = true;
 		for (int velocityIndex = 0; velocityIndex < velocity.length; velocityIndex++) {
-			if ((velocity[velocityIndex] < particle.lowerBound) || (velocity[velocityIndex] > particle.upperBound)) {
+			if ((velocity[velocityIndex] < lowerBound) || (velocity[velocityIndex] > upperBound)) {
 				velocityCorrectlyInitialized = false;
 				break;
 			}

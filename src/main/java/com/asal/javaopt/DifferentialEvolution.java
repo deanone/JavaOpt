@@ -3,74 +3,44 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class DifferentialEvolution {
-	PropertiesParser psoPropertiesParser;
-	int dimension;
-	int populationSize;
-	double tol;
-	int maxNumIterations;
-	double lowerBound;
-	double upperBound;
-	double crossoverProbability;
-	double differentialWeight;
-
-	ArrayList<Agent> swarm;
-	FunctionToOptimize funcToOptimize;
-	
-	double[] solution;
-	Random randomNumberGenerator;
+class DifferentialEvolution extends Optimizer {
+	protected double crossoverProbability;
+	protected double differentialWeight;
 		
 	/**
 	 * Constructor.
 	 * @param propertiesFilename the name of the properties file that contains the properties of the method.
 	 */
-	public DifferentialEvolution(String propertiesFilename) {
+	protected DifferentialEvolution(String propertiesFilename) {
+		super(propertiesFilename);
 		try {
-        	// read properties of the algorithm from a properties file
-            psoPropertiesParser = new PropertiesParser(propertiesFilename);
-            psoPropertiesParser.readPropertiesValues();
-            
-            this.funcToOptimize = new FunctionToOptimize(psoPropertiesParser.getPropertyAsInteger("fType"));
-            this.dimension = psoPropertiesParser.getPropertyAsInteger("dimension");
-            this.populationSize = psoPropertiesParser.getPropertyAsInteger("populationSize");
-            this.tol = psoPropertiesParser.getPropertyAsDouble("tol");
-            this.maxNumIterations = psoPropertiesParser.getPropertyAsInteger("maxNumIterations");
-            this.lowerBound = psoPropertiesParser.getPropertyAsDouble("lowerBound");
-            this.upperBound = psoPropertiesParser.getPropertyAsDouble("upperBound");
+			// read properties of the DE algorithm from a .properties file
             this.crossoverProbability = psoPropertiesParser.getPropertyAsDouble("crossoverProbability");
             this.differentialWeight = psoPropertiesParser.getPropertyAsDouble("differentialWeight");
-            randomNumberGenerator = new Random();
-            randomNumberGenerator.setSeed(42);	// for reproducibility of the results
+            double lowerBound = psoPropertiesParser.getPropertyAsDouble("lowerBound");
+            double upperBound = psoPropertiesParser.getPropertyAsDouble("upperBound");
+            Random randomNumberGenerator = new Random();
+            randomNumberGenerator.setSeed(42); // for reproducibility of the results
             
-            // construct set of candidate solutions
+            // construct agents
             this.swarm = new ArrayList<Agent>();
-            for (int agentIndex = 0; agentIndex < this.populationSize; ++agentIndex) {
-                addAgent(new Agent(this.dimension, this.lowerBound, this.upperBound, randomNumberGenerator));
+            for (int agentIndex = 0; agentIndex < numAgents; ++agentIndex) {
+            	Agent agent = new Agent(this.dimension);
+            	agent.initialize(lowerBound, upperBound, randomNumberGenerator);
+            	addAgent(agent);
             }
-            
-            // initial random solution
-            solution = new double[dimension];
-            for (int i = 0; i < solution.length; ++i) {
-            	solution[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
-            }
-
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
 		}
 	}
 	
-	/**
-	 * Adds a new agent to the swarm.
-	 * @param agent the new agent to be added.
-	 */
-	public void addAgent(Agent agent) {
-		swarm.add(agent);
-	}
-	
     /**
      * Runs the iterative Differential Evolution (DE) procedure.
      */
-	public void run() {
+	protected void run() {
+        Random randomNumberGenerator = new Random();
+        randomNumberGenerator.setSeed(42); // for reproducibility of the results
+		
 		double[] oldSolution = Arrays.copyOf(solution, solution.length);
 		double funcValueAtOldSolution = funcToOptimize.evaluate(oldSolution);
 		
@@ -81,14 +51,14 @@ public class DifferentialEvolution {
 			System.out.println(iterationsIndex + " --> " + String.format("%.4f", funcValueAtOldSolution));
 			
 			// estimate the new positions of all agents (main part of the algorithm)
-	        for (int agentIndex = 0; agentIndex < populationSize; ++agentIndex) {
+	        for (int agentIndex = 0; agentIndex < numAgents; ++agentIndex) {
 	        	Agent agent = swarm.get(agentIndex);
 	        	double[] agentPosition = agent.getPosition();
 	        	
 	        	// step 1: pick three agents a, b, c
 	        	ArrayList<Integer> agentsPickedFromPopulation = new ArrayList<Integer>();
 	        	while (agentsPickedFromPopulation.size() != 3) {
-	        		int randomAgentFromPopulation = (randomNumberGenerator.nextInt(populationSize));
+	        		int randomAgentFromPopulation = (randomNumberGenerator.nextInt(numAgents));
 	        		if ((agentsPickedFromPopulation.contains(randomAgentFromPopulation)) || (randomAgentFromPopulation == agentIndex)) {
 	        			continue;
 	        		} else {
@@ -126,7 +96,7 @@ public class DifferentialEvolution {
 	        }
 	        
 	        // termination evaluation
-	        for (int agentIndex = 0; agentIndex < populationSize; ++agentIndex) {
+	        for (int agentIndex = 0; agentIndex < numAgents; ++agentIndex) {
 	        	Agent agent = swarm.get(agentIndex);
 	        	double[] agentPosition = agent.getPosition();
 	        	double funcValueAtPosition = funcToOptimize.evaluate(agentPosition);
@@ -147,35 +117,4 @@ public class DifferentialEvolution {
             }
 		}
 	}
-	
-    /**
-     * Prints the solution.
-     */
-    public void printSolution() {
-        System.out.println();
-        System.out.println("<------------------------ Solution ------------------------>");
-        char[] spaces = new char[10];
-        Arrays.fill(spaces, ' ');
-        System.out.print(new String(spaces));
-        System.out.print("x = [");
-        System.out.printf("%.4f", solution[0]);
-        for (int solutionElementIndex = 1; solutionElementIndex < solution.length; ++solutionElementIndex) {
-            System.out.printf(", %.4f", solution[solutionElementIndex]);
-        }
-        System.out.print("]");
-        System.out.println(", f(x) = " + String.format("%.4f", funcToOptimize.evaluate(solution)));
-        System.out.println("<---------------------------------------------------------->");
-    }
-	
-    /**
-     * Starting point of the application.
-     */
-    public static void main(String[] args) {
-    	String propertiesFilename = "\\DE.properties";
-        DifferentialEvolution differentialEvolutionMethod = new DifferentialEvolution(propertiesFilename);
-        differentialEvolutionMethod.run();
-        differentialEvolutionMethod.printSolution();
-        //System.out.printf("\nOptimum objective function value for solution g: %.4f\n", pso.f.f(pso.getSolution()));
-        System.exit(0);
-    }
 }
