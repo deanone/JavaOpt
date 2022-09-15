@@ -2,11 +2,17 @@
 
 The JavaOpt library contains a collection of [metaheuristics](https://en.wikipedia.org/wiki/Metaheuristic) for optimization.
 
-In computer science and mathematical optimization, a metaheuristic is a higher-level procedure or heuristic designed to find, generate, or select a heuristic (partial search algorithm) that may provide a sufficiently good solution to an optimization problem, especially with incomplete or imperfect information or limited computation capacity.
-
-Metaheuristics make few or no assumptions about the problem being optimized and can search very large spaces of candidate solutions. However, metaheuristics do not guarantee an optimal solution is ever found.
-
-Metaheuristics do not use the gradient of the problem being optimized, which means they does not require the optimization problem to be differentiable, as is required by classic optimization methods such as gradient descent and quasi-newton methods.
+<div style="text-align: justify;">
+	<p>
+		In computer science and mathematical optimization, a metaheuristic is a higher-level procedure or heuristic designed to find, 		generate, or select a heuristic (partial search algorithm) that may provide a sufficiently good solution to an optimization 		problem, especially with incomplete or imperfect information or limited computation capacity.
+	</p>
+	<p>
+		Metaheuristics make few or no assumptions about the problem being optimized and can search very large spaces of candidate 		solutions. However, metaheuristics do not guarantee an optimal solution is ever found.
+	</p>
+	<p>
+		Metaheuristics do not use the gradient of the problem being optimized, which means they do not require the optimization 		problem to be differentiable, as is required by classic optimization methods such as gradient descent and Quasi-Newton methods.
+	</p>
+</div>
 
 ## Optimization algorithms
 
@@ -26,6 +32,6 @@ The routines have been tested so far on the following multidimensional real-valu
 
 A set of specific terms/names is used in the source code. In particular:
 
-1. Agent: basic candidate solution
-2. Particle: enhanced candidate solution
+1. Agent: a basic candidate solution
+2. Particle: an enhanced candidate solution
 3. Swarm: a set of candidate solutions
