@@ -64,8 +64,8 @@ public class PropertiesParser {
 
     /**
      * Returns the value of a property as integer.
-     * @param propertyName the name of the property.
-     * @return the value of the property (as integer).
+     * @param propertyName the name of the property
+     * @return the value of the property (as integer)
      */
     public int getPropertyAsInteger(String propertyName) {
         return Integer.parseInt(propertiesMap.get(propertyName));
@@ -73,8 +73,8 @@ public class PropertiesParser {
 
     /**
      * Returns the value of a property as double.
-     * @param propertyName the name of the property.
-     * @return the value of the property (as double).
+     * @param propertyName the name of the property
+     * @return the value of the property (as double)
      */
     public double getPropertyAsDouble(String propertyName) {
         return Double.parseDouble(propertiesMap.get(propertyName));

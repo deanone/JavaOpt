@@ -5,7 +5,7 @@ package com.asal.javaopt;
  * @version 0.2
  * @since 2020-04-25
  *
- * DistanceCalculator class: A class implementing a set of distance functions between particles.
+ * DistanceCalculator class: A class implementing a set of distance functions between 2 vectors (i.e., arrays of double).
  */
 public class DistanceCalculator {
     double[] firstVector;
@@ -13,6 +13,8 @@ public class DistanceCalculator {
 
     /**
      * Constructor.
+     * @param firstVector the first vector
+     * @param secondVector the second vector
      */
     public DistanceCalculator(double[] firstVector, double[] secondVector) {
         this.firstVector = firstVector;
@@ -21,7 +23,7 @@ public class DistanceCalculator {
 
     /**
      * Computes the Euclidean distance between two vectors.
-     * @return the Euclidean distance.
+     * @return the Euclidean distance
      */
     public double euclideanDistance() {
         double dist = 0.0;

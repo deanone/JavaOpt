@@ -15,15 +15,16 @@ public class FunctionToOptimize {
 
     /**
      * Constructor.
+     * @param the type of the function
      */
     public FunctionToOptimize(int type) {
         this.type = type;
     }
 
     /**
-     * Implements a mathematical function optimized by PSO.
-     * @param x the input of the function.
-     * @return output of the function.
+     * Implements a mathematical multidimensional real-valued function optimized by an optimization algorithm.
+     * @param x the input of the function
+     * @return output of the function
      */
     double evaluate(double[] x) {
         double result = 0.0;

@@ -16,7 +16,7 @@ public class Agent {
         
     /**
      * Constructor.
-     * @param dimension the dimension of the particle.
+     * @param dimension the dimension of the particle
      */
     public Agent(int dimension) {
         this.dimension = dimension;
@@ -25,9 +25,9 @@ public class Agent {
     
     /**
      * Initializes the agent.
-     * @param lowerBound the lower bound of the interval from which the initial random values of the agent are generated.
-     * @param upperBound the upper bound of the interval from which the initial random values of the agent are generated. 
-     * @param randomNumberGenerator a random number generator object.
+     * @param lowerBound the lower bound of the interval from which the initial random values of the agent are generated
+     * @param upperBound the upper bound of the interval from which the initial random values of the agent are generated
+     * @param randomNumberGenerator a random number generator object
      */
     protected void initialize(double lowerBound, double upperBound, Random randomNumberGenerator) {
         // initialize position
@@ -38,7 +38,7 @@ public class Agent {
         
     /**
      * Sets the dimension of the agent.
-     * @param dimension the dimension of the agent.
+     * @param dimension the dimension of the agent
      */
     protected void setDimension(int dimension) {
         this.dimension = dimension;
@@ -46,7 +46,7 @@ public class Agent {
     
     /**
      * Returns the dimension of the agent.
-     * @return the dimension of the agent.
+     * @return the dimension of the agent
      */
     protected int getDimension() {
         return dimension;
@@ -54,7 +54,7 @@ public class Agent {
     
     /**
      * Sets the position of the agent.
-     * @param position the position of the agent.
+     * @param position the position of the agent
      */
     protected void setPosition(double[] position) {
         this.position = Arrays.copyOf(position, position.length);
@@ -62,7 +62,7 @@ public class Agent {
     
     /**
      * Returns the position of the agent.
-     * @return the position of the agent.
+     * @return the position of the agent
      */
     protected double[] getPosition() {
         return position;
@@ -70,8 +70,8 @@ public class Agent {
     
     /**
      * Returns a specific element from the position vector of the agent.
-     * @param elementIndex the index of the element to return.
-     * @return the specific element from the position vector of the agent.
+     * @param elementIndex the index of the element to return
+     * @return the specific element from the position vector of the agent
      */
     public double getPositionElement(int elementIndex) {
         if ((elementIndex >= 0) && (elementIndex < dimension)) {

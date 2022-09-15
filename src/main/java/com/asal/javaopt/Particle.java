@@ -17,9 +17,9 @@ public class Particle extends Agent {
 
     /**
      * Constructor.
-     * @param dimension the dimension of the particle.
-     * @param lowerBound the lower bound of the interval from which the initial random values of the Particle are generated.
-     * @param upperBound the upper bound of the interval from which the initial random values of the Particle are generated.
+     * @param dimension the dimension of the particle
+     * @param lowerBound the lower bound of the interval from which the initial random values of the Particle are generated
+     * @param upperBound the upper bound of the interval from which the initial random values of the Particle are generated
      */
     public Particle(int dimension) {
     	super(dimension);
@@ -29,9 +29,9 @@ public class Particle extends Agent {
     
     /**
      * Initializes the particle.
-     * @param lowerBound the lower bound of the interval from which the initial random values of the particle are generated.
-     * @param upperBound the upper bound of the interval from which the initial random values of the particle are generated. 
-     * @param randomNumberGenerator a random number generator object.
+     * @param lowerBound the lower bound of the interval from which the initial random values of the particle are generated
+     * @param upperBound the upper bound of the interval from which the initial random values of the particle are generated
+     * @param randomNumberGenerator a random number generator object
      */
     public void initialize(double lowerBound, double upperBound, Random randomNumberGenerator) {
     	// initialize position
@@ -50,7 +50,7 @@ public class Particle extends Agent {
     
     /**
      * Sets the velocity of the particle.
-     * @param velocity the velocity of the particle.
+     * @param velocity the velocity of the particle
      */
     public void setVelocity(double[] velocity) {
         this.velocity = Arrays.copyOf(velocity, velocity.length);
@@ -58,7 +58,7 @@ public class Particle extends Agent {
     
     /**
      * Returns the velocity of the particle.
-     * @return the velocity of the particle.
+     * @return the velocity of the particle
      */
     public double[] getVelocity() {
         return velocity;
@@ -66,8 +66,8 @@ public class Particle extends Agent {
     
     /**
      * Returns a specific element from the velocity vector of the particle.
-     * @param i the index of the element to return.
-     * @return the specific element from the velocity vector of the particle.
+     * @param elementIndex the index of the element to return
+     * @return the specific element from the velocity vector of the particle
      */
     public double getVelocityElement(int elementIndex) {
         if ((elementIndex >= 0) && (elementIndex < dimension)) {
@@ -79,7 +79,7 @@ public class Particle extends Agent {
     
     /**
      * Sets the best position of the particle.
-     * @param bestPosition the best position of the particle.
+     * @param bestPosition the best position of the particle
      */
     public void setBestPosition(double[] bestPosition) {
         this.bestPosition = Arrays.copyOf(bestPosition, bestPosition.length);
@@ -87,7 +87,7 @@ public class Particle extends Agent {
     
     /**
      * Returns the best position of the particle.
-     * @return the best position of the particle.
+     * @return the best position of the particle
      */
     public double[] getBestPosition() {
         return bestPosition;
@@ -95,8 +95,8 @@ public class Particle extends Agent {
     
     /**
      * Returns a specific element from the best position vector of the particle.
-     * @param i the index of the element to return.
-     * @return the specific element from the best position vector of the particle.
+     * @param elementIndex the index of the element to return
+     * @return the specific element from the best position vector of the particle
      */
     public double getBestPositionElement(int elementIndex) {
         if ((elementIndex >= 0) && (elementIndex < dimension)) {

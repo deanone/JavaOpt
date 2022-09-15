@@ -23,7 +23,7 @@ class Optimizer {
 	
 	/**
 	 * Constructor
-	 * @param propertiesFilename the name of the .properties file containing the configuration of the optimization algorithm. 
+	 * @param propertiesFilename the name of the .properties file containing the configuration of the optimization algorithm
 	 */
 	protected Optimizer(String propertiesFilename) {
 		psoPropertiesParser = new PropertiesParser(propertiesFilename);
@@ -54,7 +54,7 @@ class Optimizer {
 	
 	/**
 	 * Sets the dimension of the candidate solutions.
-	 * @param dimension the dimension of the candidate solutions.
+	 * @param dimension the dimension of the candidate solutions
 	 */
 	protected void setDimension(int dimension) {
 		this.dimension = dimension;
@@ -62,7 +62,7 @@ class Optimizer {
 	
     /**
      * Returns the dimension of the candidate solutions.
-     * @return the dimension of the candidate solutions.
+     * @return the dimension of the candidate solutions
      */
     protected int getDimension() {
         return dimension;
@@ -70,7 +70,7 @@ class Optimizer {
     
     /**
      * Sets the number of agents.
-     * @param numAgents the number of agents. 
+     * @param numAgents the number of agents
      */
     protected void setNumAgents(int numAgents) {
     	this.numAgents = numAgents;
@@ -78,7 +78,7 @@ class Optimizer {
     
     /**
      * Returns the number of agents.
-     * @return the number of agents.
+     * @return the number of agents
      */
     protected int getNumAgents() {
         return swarm.size();
@@ -86,7 +86,7 @@ class Optimizer {
     
     /**
      * Adds a new agent to the swarm.
-     * @param agent the new agent.
+     * @param agent the new agent
      */
     protected void addAgent(Agent agent) {
         swarm.add(agent);
@@ -94,8 +94,8 @@ class Optimizer {
 
     /**
      * Returns an agent from the swarm.
-     * @param agentIndex the index of the agent to return.
-     * @return the agent at the input index.
+     * @param agentIndex the index of the agent to return
+     * @return the agent at the input index
      */
     public Agent getAgent(int agentIndex) {
         return swarm.get(agentIndex);
@@ -103,7 +103,7 @@ class Optimizer {
     
     /**
      * Sets the tolerance of the optimization algorithm.
-     * @param tol the tolerance of the optimization algorithm.
+     * @param tol the tolerance of the optimization algorithm
      */
     protected void setTolerance(double tol) {
     	this.tol = tol;
@@ -111,7 +111,7 @@ class Optimizer {
 	
     /**
      * Returns the tolerance of the optimization algorithm.
-     * @return the tolerance of the optimization algorithm.
+     * @return the tolerance of the optimization algorithm
      */
     protected double getTolerance() {
         return tol;
@@ -119,7 +119,7 @@ class Optimizer {
     
     /**
      * Sets the maximum number of iterations of the optimization algorithm.
-     * @param maxNumIterations the maximum number of iterations of the optimization algorithm.
+     * @param maxNumIterations the maximum number of iterations of the optimization algorithm
      */
     protected void setMaxNumIterations(int maxNumIterations) {
     	this.maxNumIterations = maxNumIterations;
@@ -127,7 +127,7 @@ class Optimizer {
     
     /**
      * Returns the maximum number of iterations of the optimization algorithm.
-     * @return the maximum number of iterations of the optimization algorithm.
+     * @return the maximum number of iterations of the optimization algorithm
      */
     public int getMaxNumIterations() {
         return maxNumIterations;
@@ -135,7 +135,7 @@ class Optimizer {
 	
     /**
      * Returns the solution of the optimization algorithm.
-     * @return the solution of the optimization algorithm.
+     * @return the solution of the optimization algorithm
      */
     protected double[] getSolution() {
         return solution;
@@ -160,6 +160,5 @@ class Optimizer {
     }
     
     protected void run() {
-    	
     }
 }

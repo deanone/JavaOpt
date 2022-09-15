@@ -10,7 +10,7 @@ class DifferentialEvolution extends Optimizer {
 		
 	/**
 	 * Constructor.
-	 * @param propertiesFilename the name of the properties file that contains the properties of the method.
+	 * @param propertiesFilename the name of the properties file that contains the properties of the method
 	 */
 	protected DifferentialEvolution(String propertiesFilename) {
 		super(propertiesFilename);

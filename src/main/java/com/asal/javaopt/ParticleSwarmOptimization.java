@@ -17,7 +17,7 @@ class ParticleSwarmOptimization extends Optimizer {
 
     /**
      * Constructor.
-     * @param propertiesFilename the name of the properties file that contains the properties of the method.
+     * @param propertiesFilename the name of the properties file that contains the properties of the method
      */
     protected ParticleSwarmOptimization(String propertiesFilename) {
     	super(propertiesFilename);
