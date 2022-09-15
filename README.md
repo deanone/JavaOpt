@@ -8,12 +8,24 @@ Metaheuristics make few or no assumptions about the problem being optimized and 
 
 Metaheuristics do not use the gradient of the problem being optimized, which means they does not require the optimization problem to be differentiable, as is required by classic optimization methods such as gradient descent and quasi-newton methods.
 
+## Optimization algorithms
+
 Currently, the library contains the following routines:
 
 1. [Particle Swarm Optimization (PSO)](https://en.wikipedia.org/wiki/Particle_swarm_optimization)
 2. [Differential Evolution (DE)](https://en.wikipedia.org/wiki/Differential_evolution)
 
+## Multidimensional real-valued functions
+
 The routines have been tested so far on the following multidimensional real-valued functions:
 
 1. [Sphere function](https://www.sfu.ca/~ssurjano/spheref.html)
 2. [Rosenbrock function](https://en.wikipedia.org/wiki/Rosenbrock_function)
+
+## Terminology used in code
+
+A set of specific terms/names is used in the source code. In particular:
+
+1. Agent: basic candidate solution
+2. Particle: enhanced candidate solution
+3. Swarm: a set of candidate solutions
