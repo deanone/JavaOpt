@@ -53,6 +53,27 @@ public abstract class Optimizer {
 	}
 	
 	/**
+	 * Constructor (mainly used for testing).
+	 */
+	protected Optimizer(int fType, int dimension, int numAgents, double tol, int maxNumIterations, double lowerBound, double upperBound) {
+		this.funcToOptimize = new FunctionToOptimize(fType);
+		this.dimension = dimension;
+		this.numAgents = numAgents;
+		this.tol = tol;
+		this.maxNumIterations = maxNumIterations;
+		swarm = new ArrayList<Agent>();
+		
+        Random randomNumberGenerator = new Random();
+        randomNumberGenerator.setSeed(42); // for reproducibility of the results
+		
+        // initialize the solution vector
+        solution = new double[dimension];
+        for (int i = 0; i < solution.length; ++i) {
+        	solution[i] = lowerBound + (randomNumberGenerator.nextDouble() * (upperBound - lowerBound));
+        }
+	}
+	
+	/**
 	 * Sets the dimension of the candidate solutions.
 	 * @param dimension the dimension of the candidate solutions
 	 */
@@ -66,14 +87,6 @@ public abstract class Optimizer {
      */
     protected int getDimension() {
         return dimension;
-    }
-    
-    /**
-     * Sets the number of agents.
-     * @param numAgents the number of agents
-     */
-    protected void setNumAgents(int numAgents) {
-    	this.numAgents = numAgents;
     }
     
     /**

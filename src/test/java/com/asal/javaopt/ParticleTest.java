@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * @version 0.2
  * @since 2020-04-25
  *
- * AgentTest class: The class that tests the Agent class.
+ * ParticleTest class: The class that tests the Particle class.
  */
 @DisplayName("The class that tests the Particle class.")
 public class ParticleTest {

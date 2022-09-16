@@ -43,6 +43,26 @@ public class ParticleSwarmOptimization extends Optimizer {
     }
     
     /**
+     * Constructor (mainly used by the ParticleSwarmOptimizationTest class). 
+     */
+    protected ParticleSwarmOptimization(int fType, int dimension, int numAgents, double tol, int maxNumIterations, double lowerBound, double upperBound, 
+    		double inertiaWeight, double cognitiveCoefficient, double socialCoefficient) {
+    	super(fType, dimension, numAgents, tol, maxNumIterations, lowerBound, upperBound);
+    	this.inertiaWeight = inertiaWeight;
+    	this.cognitiveCoefficient = cognitiveCoefficient;
+    	this.socialCoefficient = socialCoefficient;
+        Random randomNumberGenerator = new Random();
+        randomNumberGenerator.setSeed(42); // for reproducibility of the results
+    	
+        // construct particles
+        for (int particleIndex = 0; particleIndex < numAgents; ++particleIndex) {
+        	Particle particle = new Particle(this.dimension);
+        	particle.initialize(lowerBound, upperBound, randomNumberGenerator);
+        	addAgent(particle);
+        }
+    }
+    
+    /**
      * Runs the iterative Particle Swarm Optimization (PSO) procedure.
      */
     protected void run() {
